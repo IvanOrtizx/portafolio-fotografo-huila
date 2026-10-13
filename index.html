@@ -1,0 +1,709 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="description" content="Camilo Ortiz Motta, fotografía y video de bodas, 15 años, embarazo, niños y sesiones personalizadas en Neiva, Huila.">
+<meta property="og:title" content="Camilo Ortiz Motta · Fotografía y video">
+<meta property="og:description" content="Bodas, 15 años, embarazo, niños y sesiones personalizadas en Neiva, Huila.">
+<meta property="og:image" content="img/quince-01.jpg">
+<meta name="theme-color" content="#f6f5f3">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Ccircle cx='32' cy='32' r='30' fill='%2315110e'/%3E%3Ccircle cx='32' cy='32' r='15' fill='none' stroke='%23d42f27' stroke-width='6'/%3E%3C/svg%3E">
+<style>
+:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+body{margin:0}
+img{max-width:100%}
+[hidden]{display:none!important}
+</style>
+<title>Camilo Ortiz Motta</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,500..800&family=Instrument+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap">
+<style>
+/* Layout: todo centrado sobre estudio blanco. Intro fija: el retrato recortado se desarma en partículas que escriben la frase; luego galerías en teclas 3D, planes, video, sesiones y entrega. */
+:root{
+  --paper:#f6f5f3;
+  --card:#ffffff;
+  --ink:#15110e;
+  --mute:#6b6259;
+  --line:#e4dfd8;
+  --edge:#dcd5cc;
+  --red:#d42f27;
+  --dark:#0f0d0c;
+  --f-display:"Bricolage Grotesque","Arial Black",system-ui,sans-serif;
+  --f-body:"Instrument Sans",system-ui,-apple-system,"Segoe UI",sans-serif;
+  --f-mono:"JetBrains Mono",ui-monospace,Menlo,monospace;
+  --gutter:clamp(16px,4vw,48px);
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html{background:var(--paper);scroll-behavior:smooth}
+body{background:var(--paper);color:var(--ink);font-family:var(--f-body);font-size:16px;line-height:1.6;overflow-x:hidden;text-align:center}
+a{color:inherit}
+button{font:inherit;color:inherit}
+::selection{background:var(--red);color:#fff}
+:focus-visible{outline:2px solid var(--red);outline-offset:3px}
+.sr{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+#lens{position:fixed;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:0}
+header,main,footer{position:relative;z-index:2}
+.wrap{max-width:1200px;margin:0 auto;padding-inline:var(--gutter)}
+
+/* Nav */
+header{position:fixed;top:0;left:0;right:0;z-index:20;padding-top:env(safe-area-inset-top,0px);transition:background .3s,border-color .3s;border-bottom:1px solid transparent}
+header.scrolled{background:color-mix(in srgb,var(--paper) 82%,transparent);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-color:var(--line)}
+.nav{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:12px;padding-block:14px}
+.nav-l{display:flex;gap:22px;justify-content:flex-start;font-size:14.5px;font-weight:600}
+.nav-l a{text-decoration:none;color:var(--mute)}
+.nav-l a:hover{color:var(--ink)}
+.mark{font-family:var(--f-display);font-weight:800;font-size:17px;letter-spacing:-.01em;text-decoration:none;white-space:nowrap}
+.mark span{color:var(--red)}
+.nav-r{display:flex;justify-content:flex-end}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;border-radius:999px;padding:14px 24px;font-weight:700;font-size:15px;text-decoration:none;border:1.5px solid var(--ink);background:transparent;cursor:pointer;transition:transform .2s ease,background .2s ease,color .2s ease,border-color .2s}
+.btn:hover{transform:translateY(-2px)}
+.btn-red{background:var(--red);border-color:var(--red);color:#fff}
+.btn-red:hover{background:var(--ink);border-color:var(--ink)}
+.btn-ink{background:var(--ink);color:#fff}
+.btn-ink:hover{background:var(--red);border-color:var(--red)}
+.btn-sm{padding:9px 16px;font-size:14px}
+.btn svg{width:18px;height:18px;flex:none}
+
+/* Intro con partículas */
+.intro{position:relative;height:175vh}
+.pin{position:sticky;top:0;height:100vh;height:100svh;overflow:hidden;display:flex;flex-direction:column;padding-top:calc(env(safe-area-inset-top,0px) + 72px);padding-bottom:calc(4svh + env(safe-area-inset-bottom,0px))}
+.photo-box{order:2;flex:1 1 auto;min-height:0;position:relative;margin-top:clamp(14px,2.5svh,26px)}
+.ghost{position:absolute;left:50%;top:0;transform:translateX(-50%);height:100%;aspect-ratio:3/4;max-width:calc(100vw - 32px);border-radius:20px;overflow:hidden;box-shadow:0 40px 70px -35px rgba(40,25,10,.55);will-change:opacity,transform;container-type:inline-size}
+.ghost img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.ghost::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(10,8,6,.55),rgba(10,8,6,.15) 32%,transparent 50%);pointer-events:none}
+.i-role{position:absolute;left:0;right:0;top:7%;z-index:1;padding-inline:6%;font-family:var(--f-display);font-weight:800;color:#fff;letter-spacing:-.035em;line-height:.98;font-size:min(calc(clamp(44px,9.2vw,148px) * .6),7.4cqi);text-shadow:0 2px 18px rgba(0,0,0,.35);white-space:nowrap}
+#px{position:absolute;inset:0;width:100%;height:100%;pointer-events:none}
+.i-name{order:1;flex:none;position:relative;padding-inline:var(--gutter);will-change:opacity,transform}
+.eyebrow{font-family:var(--f-mono);font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:var(--mute);display:inline-flex;gap:10px;align-items:center;justify-content:center;flex-wrap:wrap}
+.eyebrow i{width:8px;height:8px;border-radius:50%;background:var(--red);box-shadow:0 0 10px var(--red);animation:rec 1.6s infinite}
+@keyframes rec{50%{opacity:.25}}
+h1{font-family:var(--f-display);font-weight:800;font-size:clamp(44px,9.2vw,148px);line-height:.86;letter-spacing:-.045em;text-transform:uppercase;margin:14px 0 0;text-wrap:balance}
+h1 span{color:var(--red)}
+.cue{position:absolute;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--ink);background:rgba(255,255,255,.75);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);padding:8px 14px;border-radius:999px;display:flex;gap:8px;align-items:center}
+.cue b{display:inline-block;animation:down 1.4s ease-in-out infinite}
+@keyframes down{50%{transform:translateY(4px)}}
+.i-end{position:absolute;left:0;right:0;bottom:calc(9vh + env(safe-area-inset-bottom,0px));padding-inline:var(--gutter);opacity:0;pointer-events:none;transition:opacity .4s}
+.i-end.on{opacity:1;pointer-events:auto}
+.i-end p{margin:0 0 18px;font-weight:600;color:#3d352f}
+.fallback{position:absolute;left:0;right:0;top:44%;transform:translateY(-50%);will-change:opacity,transform;font-family:var(--f-display);font-weight:800;text-transform:uppercase;font-size:clamp(40px,9vw,130px);line-height:.9;letter-spacing:-.045em;opacity:0;padding-inline:var(--gutter)}
+.fallback span{color:var(--red)}
+
+/* Tira */
+.strip{padding-block:30px 10px;overflow:hidden;-webkit-mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent);mask-image:linear-gradient(90deg,transparent,#000 8%,#000 92%,transparent)}
+.track{display:flex;gap:14px;width:max-content;animation:slide 70s linear infinite}
+.strip:hover .track{animation-play-state:paused}
+@keyframes slide{to{transform:translateX(-50%)}}
+.track button{flex:none;border:0;padding:0;background:none;cursor:pointer;border-radius:14px;overflow:hidden;height:210px;transition:transform .35s cubic-bezier(.2,.8,.2,1)}
+.track button:hover{transform:translateY(-6px) rotate(-1deg)}
+.track img{height:100%;width:auto;display:block}
+
+/* Secciones */
+section{padding-block:clamp(72px,9vw,130px)}
+.head{display:flex;flex-direction:column;align-items:center;gap:12px;margin-bottom:48px}
+h2{font-family:var(--f-display);font-weight:800;font-size:clamp(38px,5.8vw,78px);line-height:.95;letter-spacing:-.04em;margin:0;max-width:16ch;text-wrap:balance}
+h2 span{color:var(--red)}
+.note{color:var(--mute);max-width:52ch;margin:0 auto;font-size:17px}
+.pill{display:inline-block;font-family:var(--f-mono);font-size:11px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px;background:var(--ink);color:#fff}
+
+/* Teclas 3D */
+.cats{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:26px}
+.cat{all:unset;display:block;cursor:pointer;perspective:900px;-webkit-tap-highlight-color:transparent;border-radius:26px}
+.cat:focus-visible{outline:2px solid var(--red);outline-offset:6px}
+.cat-body{display:block;--rx:0deg;--ry:0deg;--press:0px;position:relative;transform-style:preserve-3d;transform:translateY(var(--press)) rotateX(var(--rx)) rotateY(var(--ry));transition:transform .25s ease,box-shadow .25s ease;background:linear-gradient(180deg,#fff,#faf8f5);border-radius:26px;border:1px solid #efebe5;padding:16px 16px 20px;box-shadow:0 12px 0 var(--edge),0 13px 0 #cdc5ba,0 34px 46px -18px rgba(60,35,15,.38)}
+.cat.pressed .cat-body,.cat:active .cat-body{--press:10px;box-shadow:0 2px 0 var(--edge),0 3px 0 #cdc5ba,0 10px 16px -8px rgba(60,35,15,.35)}
+.cat-stage{display:block;position:relative;height:clamp(180px,20vw,250px);transform-style:preserve-3d}
+.cat-stage img{position:absolute;left:50%;top:6px;width:56%;margin-left:-28%;aspect-ratio:4/5;object-fit:cover;border-radius:12px;border:5px solid #fff;box-shadow:0 14px 24px -10px rgba(30,20,10,.45);transition:transform .55s cubic-bezier(.2,.9,.2,1.15);backface-visibility:hidden}
+.cat-stage .l1{transform:translateZ(60px)}
+.cat-stage .l2{transform:translateZ(28px) translateX(-30%) rotateZ(-9deg)}
+.cat-stage .l3{transform:translateZ(0) translateX(30%) rotateZ(9deg)}
+.cat:hover .l1,.cat.on .l1{transform:translateZ(95px) translateY(-10px)}
+.cat:hover .l2,.cat.on .l2{transform:translateZ(45px) translateX(-48%) rotateZ(-15deg)}
+.cat:hover .l3,.cat.on .l3{transform:translateZ(20px) translateX(48%) rotateZ(15deg)}
+.cat-info{display:flex;flex-direction:column;align-items:center;gap:6px;margin-top:16px;transform:translateZ(36px)}
+.cat-info b{display:block;font-family:var(--f-display);font-size:clamp(20px,2vw,26px);letter-spacing:-.025em;line-height:1.05;font-weight:800}
+.cat-info small{font-family:var(--f-mono);font-size:11.5px;color:var(--mute)}
+.go{margin-top:6px;display:inline-flex;align-items:center;gap:8px;border-radius:999px;background:var(--ink);color:#fff;padding:8px 14px;font-size:13px;font-weight:700;box-shadow:0 4px 0 #000;transition:background .2s}
+.cat:hover .go{background:var(--red);box-shadow:0 4px 0 #8f1c16}
+.go svg{width:14px;height:14px}
+
+/* Planes */
+.switch{display:inline-flex;padding:5px;border-radius:999px;background:#ebe7e1;margin:0 auto 34px;gap:4px}
+.switch button{border:0;background:transparent;border-radius:999px;padding:11px 26px;font-weight:700;cursor:pointer;color:var(--mute);transition:all .25s}
+.switch button.on{background:var(--ink);color:#fff;box-shadow:0 4px 0 #000}
+.plans{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:18px;align-items:stretch}
+.plan{position:relative;background:var(--card);border:1px solid var(--line);border-radius:24px;padding:30px 22px 24px;display:flex;flex-direction:column;align-items:center;gap:6px;min-width:0;transition:transform .3s cubic-bezier(.2,.8,.2,1),box-shadow .3s}
+.plan:hover{transform:translateY(-6px);box-shadow:0 30px 50px -30px rgba(60,35,15,.4)}
+.plan.top{background:var(--ink);color:#fff;border-color:var(--ink)}
+.plan .tag{position:absolute;top:-12px;left:50%;transform:translateX(-50%);background:var(--red);color:#fff;font-family:var(--f-mono);font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;padding:5px 11px;border-radius:999px;white-space:nowrap}
+.plan small{font-family:var(--f-mono);font-size:11px;letter-spacing:.14em;text-transform:uppercase;color:var(--mute)}
+.plan.top small{color:#a89c90}
+.plan h3{font-family:var(--f-display);font-weight:800;font-size:clamp(28px,2.6vw,36px);letter-spacing:-.03em;margin:0 0 10px;line-height:1}
+.plan ul{list-style:none;padding:0;margin:0 0 22px;display:flex;flex-direction:column;gap:0;width:100%}
+.plan li{padding:10px 4px;border-top:1px solid var(--line);font-size:15px;line-height:1.35}
+.plan.top li{border-color:#2e2722}
+.plan li.new{font-weight:700}
+.plan li.new::before{content:"+ ";color:var(--red)}
+.plan .btn{margin-top:auto;width:100%}
+.plan.top .btn{background:var(--red);border-color:var(--red);color:#fff}
+.after{margin-top:30px;display:inline-flex;align-items:center;gap:12px;background:var(--card);border:1px solid var(--line);border-radius:999px;padding:10px 20px 10px 10px;font-weight:600;max-width:100%}
+.after b{font-family:var(--f-display);font-weight:800;font-size:20px;background:var(--red);color:#fff;border-radius:999px;padding:4px 12px;flex:none}
+
+/* Video */
+.vid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;max-width:900px;margin:0 auto}
+.vcard{background:var(--dark);color:#f1ebe2;border-radius:24px;padding:34px 26px;display:flex;flex-direction:column;align-items:center;gap:10px;position:relative;overflow:hidden;min-width:0}
+.vcard .len{font-family:var(--f-display);font-weight:800;font-size:clamp(48px,6vw,76px);line-height:.9;letter-spacing:-.04em}
+.vcard .len span{font-size:.4em;letter-spacing:0}
+.vcard h3{font-family:var(--f-display);font-weight:800;font-size:24px;margin:4px 0 0;letter-spacing:-.02em}
+.vcard p{margin:0;color:#b9ada0;max-width:34ch}
+.tl{width:100%;height:30px;margin-top:12px;display:flex;gap:2px;align-items:flex-end}
+.tl i{flex:1;background:#3a322b;border-radius:2px}
+.tl i.hit{background:var(--red)}
+
+/* Sesiones */
+.sess{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px}
+.scard{background:var(--card);border:1px solid var(--line);border-radius:24px;overflow:hidden;display:flex;flex-direction:column;min-width:0}
+.scard img{width:100%;aspect-ratio:4/3;object-fit:cover;object-position:center 22%;display:block}
+.scard .in{padding:24px 22px 26px;display:flex;flex-direction:column;align-items:center;gap:10px;flex:1}
+.scard h3{font-family:var(--f-display);font-weight:800;font-size:28px;letter-spacing:-.03em;margin:0;line-height:1}
+.scard ul{list-style:none;padding:0;margin:0 0 14px;width:100%}
+.scard li{padding:9px 4px;border-top:1px solid var(--line);font-size:15px;line-height:1.35}
+.scard .btn{margin-top:auto}
+
+/* Entrega */
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px;margin-top:10px}
+.step{display:flex;flex-direction:column;align-items:center;gap:10px;padding:10px 12px;min-width:0}
+.step .n{font-family:var(--f-display);font-weight:800;font-size:64px;line-height:1;color:var(--red);letter-spacing:-.04em}
+.step h3{font-family:var(--f-display);font-weight:800;font-size:24px;letter-spacing:-.02em;margin:0;line-height:1.05}
+.step p{margin:0;color:var(--mute);max-width:30ch}
+.prints{display:flex;justify-content:center;align-items:flex-end;gap:26px;margin-top:46px;perspective:800px}
+.print{background:#fff;padding:8px 8px 22px;box-shadow:0 20px 34px -18px rgba(40,25,10,.45);transform:rotateX(18deg) rotateZ(-4deg);display:flex;flex-direction:column;gap:6px;transition:transform .4s}
+.print:nth-child(2){transform:rotateX(18deg) rotateZ(5deg)}
+.print:hover{transform:none}
+.print img{display:block;object-fit:cover}
+.print span{font-family:var(--f-mono);font-size:11px;color:var(--mute)}
+.p1 img{width:130px;height:180px}
+.p2 img{width:100px;height:150px}
+.trans{margin:44px auto 0;max-width:640px;border:1.5px dashed var(--edge);border-radius:20px;padding:18px 22px;color:#3d352f}
+.trans b{font-family:var(--f-display);font-weight:800}
+
+/* Contacto */
+.contact{border-top:1px solid var(--line)}
+.contact h2{max-width:14ch;margin:0 auto;font-size:clamp(42px,6.6vw,96px)}
+.c-row{display:flex;flex-direction:column;align-items:center;gap:18px;margin-top:34px}
+.num{display:flex;gap:10px;align-items:center;font-family:var(--f-mono);font-size:15px;font-variant-numeric:tabular-nums}
+.num button{background:none;border:1px solid var(--line);border-radius:8px;padding:5px 10px;font-family:var(--f-mono);font-size:12px;color:var(--mute);cursor:pointer}
+.num button:hover{border-color:var(--ink);color:var(--ink)}
+footer{border-top:1px solid var(--line);padding-block:28px calc(28px + env(safe-area-inset-bottom,0px));font-family:var(--f-mono);font-size:12px;color:var(--mute)}
+footer .wrap{display:flex;flex-direction:column;align-items:center;gap:8px}
+footer a{text-decoration:none}
+footer a:hover{color:var(--red)}
+.fab{position:fixed;right:16px;bottom:calc(16px + env(safe-area-inset-bottom,0px));z-index:30;width:56px;height:56px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 12px 26px -8px rgba(0,0,0,.4);transition:transform .2s}
+.fab:hover{transform:scale(1.08)}
+.fab svg{width:28px;height:28px}
+
+/* Galería 3D */
+.g3d{position:fixed;inset:0;z-index:60;background:radial-gradient(ellipse 80% 60% at 50% 45%,#221c18,var(--dark) 70%);color:#f1ebe2;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .45s ease,visibility .45s}
+.g3d.open{opacity:1;visibility:visible}
+.g-top{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;gap:12px;padding:calc(14px + env(safe-area-inset-top,0px)) var(--gutter) 6px}
+.g-tabs{display:flex;gap:6px;flex-wrap:wrap;justify-content:center}
+.g-tabs button{background:transparent;border:1px solid #3a322b;color:#b9ada0;border-radius:999px;padding:7px 14px;font-size:13.5px;font-weight:600;cursor:pointer;transition:all .2s}
+.g-tabs button:hover{color:#fff;border-color:#776a5d}
+.g-tabs button.on{background:#f1ebe2;color:var(--dark);border-color:#f1ebe2}
+.g-close{width:44px;height:44px;border-radius:50%;border:1px solid #3a322b;background:transparent;color:#f1ebe2;cursor:pointer;display:grid;place-items:center;flex:none}
+.g-close:hover{background:#f1ebe2;color:var(--dark)}
+.g-title{padding:6px var(--gutter) 0}
+.g-title h3{font-family:var(--f-display);font-weight:800;font-size:clamp(32px,4.8vw,60px);letter-spacing:-.035em;margin:0;line-height:1}
+.g-title span{font-family:var(--f-mono);font-size:12px;color:#8f8377}
+.stage{position:relative;flex:1;min-height:0;cursor:grab;touch-action:none;user-select:none;-webkit-user-select:none}
+.stage:active{cursor:grabbing}
+.ring{position:absolute;left:50%;top:50%;transform-style:preserve-3d;will-change:transform}
+.slot{position:absolute;left:0;top:0;transform-style:preserve-3d;background:none;border:0;padding:0;cursor:pointer}
+.slot .pic{width:100%;height:100%;border-radius:10px;overflow:hidden;box-shadow:0 30px 50px -20px #000;animation:in .9s cubic-bezier(.2,.8,.2,1) both;animation-delay:var(--d,0s);background:#1d1814}
+.slot img{width:100%;height:100%;object-fit:contain;display:block;pointer-events:none;-webkit-user-drag:none}
+@keyframes in{from{opacity:0;transform:translateZ(-600px) scale(.6)}}
+.floor{position:absolute;left:50%;bottom:7%;width:min(900px,90vw);height:120px;transform:translateX(-50%);background:radial-gradient(ellipse at center,rgba(212,47,39,.22),transparent 65%);filter:blur(10px);pointer-events:none}
+.g-hint{font-family:var(--f-mono);font-size:11.5px;color:#8f8377;padding:6px 16px calc(16px + env(safe-area-inset-bottom,0px))}
+.g-nav{position:absolute;top:50%;transform:translateY(-50%);width:48px;height:48px;border-radius:50%;border:1px solid #3a322b;background:rgba(15,13,12,.5);color:#f1ebe2;cursor:pointer;display:grid;place-items:center;z-index:5}
+.g-nav:hover{background:#f1ebe2;color:var(--dark)}
+.g-prev{left:var(--gutter)}.g-next{right:var(--gutter)}
+.g-nav svg{width:20px;height:20px}
+.lb{position:fixed;inset:0;z-index:70;background:#080706;display:flex;flex-direction:column;opacity:0;visibility:hidden;transition:opacity .3s,visibility .3s}
+.lb.open{opacity:1;visibility:visible}
+.lb-top{display:grid;grid-template-columns:44px 1fr 44px;align-items:center;padding:calc(14px + env(safe-area-inset-top,0px)) var(--gutter) 8px;color:#b9ada0;font-family:var(--f-mono);font-size:12.5px;gap:12px}
+.lb-fig{flex:1;min-height:0;display:flex;align-items:center;justify-content:center;padding:8px 16px;touch-action:pan-y}
+.lb-fig img{max-width:100%;max-height:100%;width:auto;height:auto;object-fit:contain;display:block;border-radius:4px;transition:opacity .25s}
+.lb-bot{display:flex;justify-content:center;gap:12px;padding:10px 16px calc(18px + env(safe-area-inset-bottom,0px))}
+.lb-bot button{width:52px;height:52px}
+
+@media (max-width:1050px){
+  .cats,.plans{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .plans{gap:26px 16px}
+}
+@media (max-width:860px){
+  .nav{grid-template-columns:1fr auto}
+  .nav-l{display:none}
+  .mark{text-align:left}
+  .sess,.steps{grid-template-columns:minmax(0,1fr)}
+  .vid{grid-template-columns:minmax(0,1fr)}
+  .g-nav{display:none}
+  .scard img{aspect-ratio:16/10}
+}
+@media (max-width:560px){
+  .cats{gap:18px 14px}
+  .plans{grid-template-columns:minmax(0,1fr)}
+  .cat-body{padding:12px 10px 14px;border-radius:20px}
+  .cat-stage{height:150px}
+  .go{padding:7px 11px;font-size:12px}
+  .track button{height:160px}
+  .after{border-radius:18px;flex-direction:column;padding:14px 16px}
+  .prints{gap:14px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important;transition:none!important}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<canvas id="lens" aria-hidden="true"></canvas>
+
+<header id="top">
+  <div class="wrap nav">
+    <nav class="nav-l"><a href="#galerias">Galerías</a><a href="#planes">Planes</a><a href="#sesiones">Sesiones</a></nav>
+    <a class="mark" href="#inicio">Camilo Ortiz Motta<span>.</span></a>
+    <div class="nav-r"><a class="btn btn-red btn-sm" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20vi%20tu%20portafolio%20y%20quiero%20cotizar" target="_blank" rel="noopener">Cotizar</a></div>
+  </div>
+</header>
+
+<main>
+  <section class="intro" id="inicio" style="padding:0">
+    <div class="pin" id="pin">
+      <div class="photo-box"><div class="ghost" id="ghost"><img src="img/quince-01.jpg" alt="Quinceañera con vestido azul frente a las montañas del Huila" width="1350" height="1800"><div class="i-role">Fotografía y video de<br>bodas, 15 años y sesiones</div></div></div>
+      <div class="fallback" id="phrase" aria-hidden="true">Hay días que<br><span>no se repiten.</span></div>
+      <div class="i-name" id="iname">
+        <div class="eyebrow"><i></i>Neiva, Huila</div>
+        <h1>Camilo <span>Ortiz</span> Motta</h1>
+      </div>
+      <h2 class="sr">Hay días que no se repiten.</h2>
+      <div class="i-end" id="iend">
+        <p>Bodas · 15 años · Niños y embarazadas · Personalizadas</p>
+        <a class="btn btn-ink" href="#galerias">Ver galerías</a>
+      </div>
+      <div class="cue" id="cue"><b>↓</b> Desliza</div>
+    </div>
+  </section>
+
+  <div class="strip" aria-label="Fotos destacadas"><div class="track" id="track"></div></div>
+
+  <section id="galerias">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Galerías</div>
+        <h2>Elige una <span>categoría</span></h2>
+        <p class="note">Toca una tecla para abrir su galería en 3D. Al tocar una foto la ves completa, tal como la entregué.</p>
+      </div>
+      <div class="cats">
+        <button class="cat" data-cat="quince" aria-label="Abrir galería de 15 años"><span class="cat-body">
+          <span class="cat-stage" aria-hidden="true"><img class="l3" src="img/quince-11-t.jpg" alt=""><img class="l2" src="img/quince-07-t.jpg" alt=""><img class="l1" src="img/quince-03-t.jpg" alt=""></span>
+          <span class="cat-info"><b>15 años</b><small data-count="quince"></small><span class="go">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>
+        </span></button>
+        <button class="cat" data-cat="bodas" aria-label="Abrir galería de bodas"><span class="cat-body">
+          <span class="cat-stage" aria-hidden="true"><img class="l3" src="img/bodas-13-t.jpg" alt=""><img class="l2" src="img/bodas-06-t.jpg" alt=""><img class="l1" src="img/bodas-02-t.jpg" alt=""></span>
+          <span class="cat-info"><b>Bodas</b><small data-count="bodas"></small><span class="go">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>
+        </span></button>
+        <button class="cat" data-cat="ninos" aria-label="Abrir galería de niños y embarazadas"><span class="cat-body">
+          <span class="cat-stage" aria-hidden="true"><img class="l3" src="img/ninos-12-t.jpg" alt=""><img class="l2" src="img/ninos-08-t.jpg" alt=""><img class="l1" src="img/ninos-02-t.jpg" alt=""></span>
+          <span class="cat-info"><b>Niños y embarazadas</b><small data-count="ninos"></small><span class="go">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>
+        </span></button>
+        <button class="cat" data-cat="personalizadas" aria-label="Abrir galería de sesiones personalizadas"><span class="cat-body">
+          <span class="cat-stage" aria-hidden="true"><img class="l3" src="img/personalizadas-03-t.jpg" alt=""><img class="l2" src="img/personalizadas-06-t.jpg" alt=""><img class="l1" src="img/personalizadas-02-t.jpg" alt=""></span>
+          <span class="cat-info"><b>Personalizadas</b><small data-count="personalizadas"></small><span class="go">Abrir <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4"><path d="M7 17 17 7M9 7h8v8"/></svg></span></span>
+        </span></button>
+      </div>
+    </div>
+  </section>
+
+  <section id="planes">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Planes para eventos</div>
+        <h2>Bodas y <span>15 años</span></h2>
+        <p class="note">Cuatro planes para cubrir tu evento. En un evento casi siempre salen más de 200 fotos.</p>
+      </div>
+      <div class="switch" role="tablist" aria-label="Tipo de evento">
+        <button role="tab" data-ev="bodas" class="on" aria-selected="true">Bodas</button>
+        <button role="tab" data-ev="quince" aria-selected="false">15 años</button>
+      </div>
+      <div class="plans" id="plans"></div>
+      <div class="after"><b>+ Video</b><span>¿Tu plan no trae video? Lo puedes agregar por aparte.</span></div>
+    </div>
+  </section>
+
+  <section id="video" style="padding-top:0">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Video</div>
+        <h2>Tu evento, <span>en movimiento</span></h2>
+        <p class="note">Grabo y edito el material durante el cubrimiento del evento. Tú eliges cómo quieres el resultado.</p>
+      </div>
+      <div class="vid">
+        <article class="vcard">
+          <div class="len">40<span> min</span></div>
+          <h3>Evento completo</h3>
+          <p>Cada minuto grabado para que quede tal cual como pasó. Videos de hasta 40 minutos.</p>
+          <div class="tl" aria-hidden="true" data-mode="full"></div>
+        </article>
+        <article class="vcard">
+          <div class="len">3–4<span> min</span></div>
+          <h3>Recopilación</h3>
+          <p>Los momentos más importantes, con una edición dinámica de 3 a 4 minutos.</p>
+          <div class="tl" aria-hidden="true" data-mode="cut"></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section id="sesiones" style="background:#efece8">
+    <div class="wrap">
+      <div class="head">
+        <div class="eyebrow">Sesiones por hora</div>
+        <h2>Embarazo, niños y <span>personalizadas</span></h2>
+        <p class="note">En estudio o al aire libre, como prefieras.</p>
+      </div>
+      <div class="sess">
+        <article class="scard">
+          <img src="img/ninos-03-t.jpg" alt="Sesión de embarazo en pareja" loading="lazy">
+          <div class="in"><h3>Embarazo</h3>
+            <ul><li>Una hora de sesión</li><li>Fotos tuyas sola y acompañada</li><li>Hasta dos personas extra: pareja, hijos, papás o hermanos</li><li>Puede venir tu mascota</li></ul>
+            <a class="btn btn-sm" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20quiero%20una%20sesi%C3%B3n%20de%20embarazo" target="_blank" rel="noopener">Agendar sesión</a></div>
+        </article>
+        <article class="scard">
+          <img src="img/ninos-05-t.jpg" alt="Sesión de niño con balón" loading="lazy">
+          <div class="in"><h3>Niños</h3>
+            <ul><li>Sesión por hora</li><li>Solo el niño o con sus papás</li><li>En estudio o al aire libre</li><li>La decoración se cotiza aparte, según lo que lleve</li></ul>
+            <a class="btn btn-sm" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20quiero%20una%20sesi%C3%B3n%20para%20ni%C3%B1os" target="_blank" rel="noopener">Agendar sesión</a></div>
+        </article>
+        <article class="scard">
+          <img src="img/personalizadas-05-t.jpg" alt="Sesión personalizada en estudio" loading="lazy">
+          <div class="in"><h3>Personalizadas</h3>
+            <ul><li>Sesión por hora</li><li>Solo o acompañado</li><li>En estudio o al aire libre</li><li>La decoración se cotiza aparte</li></ul>
+            <a class="btn btn-sm" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20quiero%20una%20sesi%C3%B3n%20personalizada" target="_blank" rel="noopener">Agendar sesión</a></div>
+        </article>
+      </div>
+
+      <div class="head" style="margin:90px 0 20px">
+        <div class="eyebrow">Así recibes tus fotos</div>
+        <h2>De la sesión <span>a tus manos</span></h2>
+      </div>
+      <div class="steps">
+        <div class="step"><div class="n">1</div><h3>Al día siguiente</h3><p>Recibes todas las fotos de tu sesión en digital.</p></div>
+        <div class="step"><div class="n">2</div><h3>Escoges 5</h3><p>Esas cinco las edito a full calidad.</p></div>
+        <div class="step"><div class="n">3</div><h3>3 impresas</h3><p>De las cinco, tres van impresas en 13×18 o 10×15 cm. El precio es el mismo.</p></div>
+      </div>
+      <div class="prints" aria-hidden="true">
+        <div class="print p1"><img src="img/ninos-10-t.jpg" alt=""><span>13 × 18 cm · para un cuadrito</span></div>
+        <div class="print p2"><img src="img/personalizadas-02-t.jpg" alt=""><span>10 × 15 cm · para el álbum</span></div>
+      </div>
+      <p class="trans"><b>¿Fuera de Neiva?</b> Si la sesión o el evento es fuera del área urbana, en los alrededores o municipios cercanos, se suma un valor de transporte. Si es más lejos, lo revisamos según el lugar.</p>
+    </div>
+  </section>
+
+  <section class="contact" id="contacto">
+    <div class="wrap">
+      <div class="eyebrow">Contacto</div>
+      <h2 style="margin-top:14px">¿Tienes una fecha <span style="color:var(--red)">especial?</span></h2>
+      <div class="c-row">
+        <a class="btn btn-red" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20vi%20tu%20portafolio%20y%20quiero%20cotizar" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Z"/></svg>
+          Cotizar por WhatsApp
+        </a>
+        <div class="num"><span id="wa-num">+57 312 450 2235</span><button id="copy" type="button">Copiar</button></div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer><div class="wrap"><span>© 2026 Camilo Ortiz Motta · Fotografía y video · Neiva, Huila</span><a href="https://www.instagram.com/fotografohuila/" target="_blank" rel="noopener">Instagram · @fotografohuila</a></div></footer>
+
+<a class="fab" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20vi%20tu%20portafolio%20y%20quiero%20cotizar" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+  <svg viewBox="0 0 24 24" fill="#fff" aria-hidden="true"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2Zm0 18.2a8.2 8.2 0 0 1-4.2-1.2l-.3-.2-3 .8.8-2.9-.2-.3A8.2 8.2 0 1 1 12 20.2Zm4.5-6.1c-.2-.1-1.5-.7-1.7-.8-.2-.1-.4-.1-.6.1l-.8 1c-.1.2-.3.2-.5.1a6.7 6.7 0 0 1-3.3-2.9c-.3-.4.3-.4.7-1.4.1-.2 0-.3 0-.4l-.8-1.8c-.2-.5-.4-.4-.6-.4h-.5a1 1 0 0 0-.7.3 2.9 2.9 0 0 0-.9 2.2 5 5 0 0 0 1.1 2.7 11.4 11.4 0 0 0 4.4 3.9c1.6.7 2.3.8 3.1.6.5-.1 1.5-.6 1.7-1.2.2-.6.2-1.1.2-1.2-.1-.1-.3-.2-.5-.3Z"/></svg>
+</a>
+
+<div class="g3d" id="g3d" role="dialog" aria-modal="true" aria-label="Galería" hidden>
+  <div class="g-top">
+    <span></span>
+    <div class="g-tabs" id="tabs"></div>
+    <button class="g-close" id="g-close" aria-label="Cerrar galería"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button>
+  </div>
+  <div class="g-title"><h3 id="g-name"></h3><span id="g-count"></span></div>
+  <div class="stage" id="stage">
+    <div class="floor"></div>
+    <div class="ring" id="ring"></div>
+    <button class="g-nav g-prev" id="g-prev" aria-label="Girar a la izquierda"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="g-nav g-next" id="g-next" aria-label="Girar a la derecha"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+  <div class="g-hint">Arrastra para girar · toca una foto para verla completa</div>
+</div>
+
+<div class="lb" id="lb" role="dialog" aria-modal="true" aria-label="Foto completa" hidden>
+  <div class="lb-top"><span></span><span id="lb-info"></span><button class="g-close" id="lb-close" aria-label="Cerrar foto"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M6 6l12 12M18 6 6 18"/></svg></button></div>
+  <div class="lb-fig" id="lb-fig"><img id="lb-img" alt=""></div>
+  <div class="lb-bot">
+    <button class="g-close" id="lb-prev" aria-label="Foto anterior"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M15 6l-6 6 6 6"/></svg></button>
+    <button class="g-close" id="lb-next" aria-label="Foto siguiente"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M9 6l6 6-6 6"/></svg></button>
+  </div>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+<script>
+const PHOTOS = {"quince":[{"id":"quince-01","w":1350,"h":1800},{"id":"quince-02","w":1066,"h":1421},{"id":"quince-03","w":1350,"h":1800},{"id":"quince-04","w":1066,"h":1421},{"id":"quince-05","w":1350,"h":1800},{"id":"quince-06","w":1350,"h":1800},{"id":"quince-07","w":1350,"h":1800},{"id":"quince-08","w":1350,"h":1800},{"id":"quince-09","w":1080,"h":1350},{"id":"quince-10","w":1080,"h":1350},{"id":"quince-11","w":1350,"h":1800},{"id":"quince-12","w":1350,"h":1800}],"bodas":[{"id":"bodas-01","w":1350,"h":1687},{"id":"bodas-02","w":1350,"h":1687},{"id":"bodas-03","w":1350,"h":1687},{"id":"bodas-04","w":1350,"h":1687},{"id":"bodas-05","w":1350,"h":1687},{"id":"bodas-06","w":1350,"h":1687},{"id":"bodas-07","w":1350,"h":1687},{"id":"bodas-08","w":1080,"h":1155},{"id":"bodas-09","w":1080,"h":1350},{"id":"bodas-10","w":1080,"h":721},{"id":"bodas-11","w":899,"h":1350},{"id":"bodas-12","w":992,"h":1350},{"id":"bodas-13","w":975,"h":1350}],"ninos":[{"id":"ninos-01","w":1080,"h":721},{"id":"ninos-02","w":1080,"h":1350},{"id":"ninos-03","w":1080,"h":1350},{"id":"ninos-04","w":1080,"h":1350},{"id":"ninos-05","w":1080,"h":1350},{"id":"ninos-06","w":1080,"h":1350},{"id":"ninos-07","w":920,"h":1350},{"id":"ninos-08","w":1350,"h":1800},{"id":"ninos-09","w":1350,"h":1800},{"id":"ninos-10","w":1056,"h":1408},{"id":"ninos-11","w":1066,"h":1421},{"id":"ninos-12","w":1358,"h":1800}],"personalizadas":[{"id":"personalizadas-01","w":1080,"h":1350},{"id":"personalizadas-02","w":1350,"h":1800},{"id":"personalizadas-03","w":1201,"h":1800},{"id":"personalizadas-04","w":1201,"h":1800},{"id":"personalizadas-05","w":853,"h":1137},{"id":"personalizadas-06","w":853,"h":1137}]};
+const CATS = {quince:'15 años', bodas:'Bodas', ninos:'Niños y embarazadas', personalizadas:'Personalizadas'};
+const WA = 'https://wa.me/573124502235?text=';
+const PLANS = {
+  bodas:{label:'Bodas', base:'Fotografías misa + recepción (4 horas)', pre:'Sesión previa pre-boda (1 hora)', dig:'Entrega digital de más de 200 fotografías'},
+  quince:{label:'15 años', base:'Fotografías ceremonia + recepción (3 horas)', pre:'Sesión previa pre-15 (1 hora)', dig:'Entrega digital'}
+};
+(function(){
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  const $ = id => document.getElementById(id);
+  const src = (p,t) => 'img/'+p.id+(t?'-t':'')+'.jpg';
+  const smooth=(a,b,x)=>{const t=Math.min(1,Math.max(0,(x-a)/(b-a)));return t*t*(3-2*t)};
+
+  document.querySelectorAll('[data-count]').forEach(el=>{ el.textContent = PHOTOS[el.dataset.count].length+' fotos'; });
+
+  /* ---------- Planes ---------- */
+  function planList(ev){
+    const P=PLANS[ev];
+    return [
+      {name:'Esencial', items:[[P.base],['Edición profesional'],[P.dig]]},
+      {name:'Recuerdo', items:[[P.base],[P.pre,1],['Edición profesional'],[P.dig]]},
+      {name:'Completo', items:[[P.base],[P.pre],['30 fotografías impresas 13×18',1],['Edición profesional y entrega digital']]},
+      {name:'Premium', top:1, items:[[P.base],[P.pre],['30 fotografías impresas'],['Video recopilación de 5 minutos',1],['Entrega digital + respaldo',1]]}
+    ];
+  }
+  function renderPlans(ev){
+    $('plans').innerHTML = planList(ev).map(p=>{
+      const msg=encodeURIComponent('Hola Camilo, me interesa el Plan '+p.name+' de '+PLANS[ev].label);
+      return '<article class="plan'+(p.top?' top':'')+'">'+(p.top?'<span class="tag">Incluye video</span>':'')+
+        '<small>Plan</small><h3>'+p.name+'</h3><ul>'+p.items.map(([t,n])=>'<li'+(n?' class="new"':'')+'>'+t+'</li>').join('')+'</ul>'+
+        '<a class="btn btn-sm" href="'+WA+msg+'" target="_blank" rel="noopener">Cotizar este plan</a></article>';
+    }).join('');
+  }
+  document.querySelectorAll('.switch button').forEach(b=>b.onclick=()=>{
+    document.querySelectorAll('.switch button').forEach(x=>{x.classList.toggle('on',x===b);x.setAttribute('aria-selected',x===b)});
+    renderPlans(b.dataset.ev);
+  });
+  renderPlans('bodas');
+
+  // líneas de tiempo del video
+  document.querySelectorAll('.tl').forEach(tl=>{
+    const full=tl.dataset.mode==='full'; let h='';
+    for(let i=0;i<48;i++){ const ht=30+Math.round(Math.abs(Math.sin(i*1.7)+Math.sin(i*.6))*35); const hit=full||[3,4,11,12,13,20,27,28,35,41,42].includes(i); h+='<i class="'+(hit?'hit':'')+'" style="height:'+ht+'%"></i>'; }
+    tl.innerHTML=h;
+  });
+
+  addEventListener('scroll',()=>$('top').classList.toggle('scrolled',scrollY>innerHeight*.5),{passive:true});
+  $('copy').addEventListener('click',()=>{
+    const b=$('copy'); const ok=()=>{b.textContent='Copiado';setTimeout(()=>b.textContent='Copiar',1600)};
+    const fb=()=>{const r=document.createRange();r.selectNodeContents($('wa-num'));const s=getSelection();s.removeAllRanges();s.addRange(r);b.textContent='Selecciónalo'};
+    try{navigator.clipboard.writeText('+573124502235').then(ok,fb)}catch(e){fb()}
+  });
+
+  /* ---------- Tira ---------- */
+  const picks=[['bodas',1],['quince',0],['ninos',1],['personalizadas',1],['bodas',7],['quince',5],['ninos',7],['quince',8],['bodas',12],['personalizadas',4],['ninos',9],['quince',11],['bodas',3],['ninos',4]];
+  const track=$('track');
+  const mk=([c,i])=>{ const p=PHOTOS[c][i]; const b=document.createElement('button'); b.setAttribute('aria-label','Ver en galería de '+CATS[c]); b.innerHTML='<img loading="lazy" src="'+src(p,1)+'" alt="" width="'+Math.round(p.w/p.h*210)+'" height="210">'; b.onclick=()=>openGallery(c,i); return b; };
+  picks.forEach(x=>track.appendChild(mk(x))); picks.forEach(x=>{const b=mk(x);b.tabIndex=-1;b.setAttribute('aria-hidden','true');track.appendChild(b)});
+
+  /* ---------- Teclas 3D ---------- */
+  document.querySelectorAll('.cat').forEach(cat=>{
+    const body=cat.querySelector('.cat-body');
+    cat.addEventListener('pointermove',e=>{ if(e.pointerType!=='mouse')return; const r=cat.getBoundingClientRect(); const x=(e.clientX-r.left)/r.width-.5, y=(e.clientY-r.top)/r.height-.5; body.style.setProperty('--rx',(-y*16).toFixed(2)+'deg'); body.style.setProperty('--ry',(x*20).toFixed(2)+'deg'); });
+    cat.addEventListener('pointerleave',()=>{ body.style.setProperty('--rx','0deg'); body.style.setProperty('--ry','0deg'); });
+    cat.addEventListener('click',()=>{ cat.classList.add('pressed','on'); setTimeout(()=>{cat.classList.remove('pressed'); openGallery(cat.dataset.cat,0); setTimeout(()=>cat.classList.remove('on'),600);}, reduce?0:220); });
+  });
+  if('IntersectionObserver' in window && matchMedia('(hover: none)').matches){
+    const io=new IntersectionObserver(es=>es.forEach(e=>e.target.classList.toggle('on',e.isIntersecting && e.intersectionRatio>.7)),{threshold:[0,.7,1]});
+    document.querySelectorAll('.cat').forEach(c=>io.observe(c));
+  }
+
+  /* ---------- Galería 3D ---------- */
+  const g=$('g3d'), ring=$('ring'), stage=$('stage'), tabs=$('tabs');
+  Object.keys(CATS).forEach(k=>{ const b=document.createElement('button'); b.textContent=CATS[k]; b.dataset.k=k; b.onclick=()=>build(k,0); tabs.appendChild(b); });
+  let cur=null, list=[], slots=[], step=0, R=0, angle=0, vel=0, drag=false, lastX=0, moved=0, downSlot=null, lastAct=0, raf=0, lastFocus=null;
+  function build(c,start){
+    cur=c; list=PHOTOS[c];
+    tabs.querySelectorAll('button').forEach(b=>b.classList.toggle('on',b.dataset.k===c));
+    $('g-name').textContent=CATS[c]; $('g-count').textContent=list.length+' fotos';
+    const sw=stage.clientWidth, sh=stage.clientHeight, n=list.length; step=360/n;
+    const cw=Math.min(240,sw*0.44), hMax=sh*0.66;
+    R=Math.max(cw*1.05,(cw*1.16)*n/(2*Math.PI));
+    stage.style.perspective=Math.max(1000,R*2.6)+'px';
+    ring.innerHTML='';
+    slots=list.map((p,i)=>{
+      let w=cw,h=cw*p.h/p.w; if(h>hMax){h=hMax;w=h*p.w/p.h;}
+      const s=document.createElement('button'); s.className='slot'; s.setAttribute('aria-label','Ver foto '+(i+1)+' de '+n);
+      s.style.cssText='width:'+w+'px;height:'+h+'px;margin-left:'+(-w/2)+'px;margin-top:'+(-h/2)+'px;transform:rotateY('+(i*step)+'deg) translateZ('+R+'px)';
+      s.innerHTML='<div class="pic" style="--d:'+(i*0.05).toFixed(2)+'s"><img src="'+src(p,1)+'" alt="" draggable="false"></div>';
+      s.addEventListener('click',e=>{ if(e.detail===0) openLB(i); });
+      ring.appendChild(s); return s;
+    });
+    angle=-start*step; vel=0; lastAct=performance.now(); render();
+  }
+  function render(){
+    ring.style.transform='translateZ('+(-R)+'px) rotateX(-4deg) rotateY('+angle+'deg)';
+    for(let i=0;i<slots.length;i++){
+      const a=((i*step+angle)%360+360)%360, c=Math.cos(a*Math.PI/180), s=slots[i];
+      s.style.opacity=c>-.15?(.28+.72*Math.max(0,c)**1.5).toFixed(3):'.1';
+      s.style.pointerEvents=c>.55?'auto':'none'; s.tabIndex=c>.9?0:-1;
+    }
+  }
+  function loop(now){
+    if(!drag){ angle+=vel; vel*=.94; if(!reduce&&Math.abs(vel)<.01&&now-lastAct>2500) angle-=.07; }
+    render(); raf=requestAnimationFrame(loop);
+  }
+  function openGallery(c,i){
+    lastFocus=document.activeElement; g.hidden=false; document.documentElement.style.overflow='hidden';
+    requestAnimationFrame(()=>{ g.classList.add('open'); build(c,i||0); cancelAnimationFrame(raf); raf=requestAnimationFrame(loop); $('g-close').focus(); });
+  }
+  function closeGallery(){
+    g.classList.remove('open'); cancelAnimationFrame(raf); document.documentElement.style.overflow='';
+    setTimeout(()=>{g.hidden=true;ring.innerHTML='';},450);
+    if(lastFocus) lastFocus.focus({preventScroll:true});
+  }
+  $('g-close').onclick=closeGallery;
+  const spin=d=>{vel=d*step*(1-.94);lastAct=performance.now()};
+  $('g-prev').onclick=()=>spin(1); $('g-next').onclick=()=>spin(-1);
+  stage.addEventListener('pointerdown',e=>{ if(e.target.closest('.g-nav'))return; drag=true;moved=0;lastX=e.clientX;vel=0;lastAct=performance.now(); downSlot=e.target.closest('.slot'); stage.setPointerCapture(e.pointerId); });
+  stage.addEventListener('pointermove',e=>{ if(!drag)return; const dx=e.clientX-lastX; lastX=e.clientX; moved+=Math.abs(dx); const k=innerWidth<600?.32:.22; angle+=dx*k; vel=dx*k; lastAct=performance.now(); });
+  const end=()=>{ if(!drag)return; drag=false; lastAct=performance.now(); if(moved<7&&downSlot){vel=0;openLB(slots.indexOf(downSlot));} downSlot=null; };
+  stage.addEventListener('pointerup',end); stage.addEventListener('pointercancel',end);
+  stage.addEventListener('wheel',e=>{e.preventDefault();vel+=(e.deltaY+e.deltaX)*-.004;lastAct=performance.now()},{passive:false});
+
+  const lb=$('lb'), li=$('lb-img'); let idx=0;
+  function show(i){
+    idx=(i+list.length)%list.length; const p=list[idx];
+    li.style.opacity='.35'; li.src=src(p,1); li.width=p.w; li.height=p.h; li.alt=CATS[cur]+' — foto '+(idx+1);
+    const full=new Image(); full.onload=()=>{ if(list[idx]===p){li.src=full.src;li.style.opacity='1';} }; full.src=src(p,0);
+    $('lb-info').textContent=CATS[cur]+' · '+(idx+1)+' / '+list.length;
+    angle=-idx*step; vel=0; lastAct=performance.now();
+  }
+  function openLB(i){ lb.hidden=false; requestAnimationFrame(()=>lb.classList.add('open')); show(i); $('lb-close').focus(); }
+  function closeLB(){ lb.classList.remove('open'); setTimeout(()=>{lb.hidden=true},300); const s=slots[idx]; if(s) s.focus({preventScroll:true}); }
+  $('lb-close').onclick=closeLB; $('lb-prev').onclick=()=>show(idx-1); $('lb-next').onclick=()=>show(idx+1);
+  let sx=null; const fig=$('lb-fig');
+  fig.addEventListener('pointerdown',e=>{sx=e.clientX});
+  fig.addEventListener('pointerup',e=>{ if(sx===null)return; const d=e.clientX-sx; sx=null; if(Math.abs(d)>45) show(idx+(d<0?1:-1)); else if(e.target===fig) closeLB(); });
+  addEventListener('keydown',e=>{
+    if(!lb.hidden&&lb.classList.contains('open')){ if(e.key==='Escape')closeLB(); else if(e.key==='ArrowRight')show(idx+1); else if(e.key==='ArrowLeft')show(idx-1); }
+    else if(!g.hidden){ if(e.key==='Escape')closeGallery(); else if(e.key==='ArrowRight')spin(-1); else if(e.key==='ArrowLeft')spin(1); }
+  });
+  addEventListener('resize',()=>{ if(!g.hidden&&cur){ const front=Math.round(((-angle/step)%list.length+list.length)%list.length); build(cur,front); } });
+
+  /* ---------- Intro: retrato que se desarma en la frase ---------- */
+  const intro=$('inicio'), ghost=$('ghost'), iname=$('iname'), iend=$('iend'), cue=$('cue'), phrase=$('phrase');
+  const introP=()=>{ const r=intro.getBoundingClientRect(); return Math.min(1,Math.max(0,-r.top/(intro.offsetHeight-innerHeight))); };
+  function domIntro(p){
+    const f=smooth(.02,.38,p);
+    ghost.style.opacity=(1-f).toFixed(3);
+    ghost.style.transform='translateX(-50%) scale('+(1+.06*f).toFixed(4)+')';
+    const nf=1-smooth(.02,.16,p);
+    iname.style.opacity=nf.toFixed(3); iname.style.transform='translateY('+(-40*(1-nf)).toFixed(1)+'px)';
+    cue.style.opacity=(1-smooth(0,.06,p)).toFixed(3);
+    const ph=smooth(.1,.4,p);
+    phrase.style.opacity=ph.toFixed(3);
+    phrase.style.transform='translateY(calc(-50% + '+(30*(1-ph)).toFixed(1)+'px)) scale('+(.96+.04*ph).toFixed(4)+')';
+    iend.classList.toggle('on',p>.42);
+  }
+
+  let lastY=scrollY, dir=1, snapT=0, snapping=false;
+  addEventListener('scroll',()=>{
+    const y=scrollY; if(y!==lastY){ dir=y>lastY?1:-1; lastY=y; }
+    if(snapping) return;
+    clearTimeout(snapT);
+    snapT=setTimeout(()=>{
+      const p=introP(); const span=intro.offsetHeight-innerHeight;
+      if(p>0.01 && p<0.45){
+        snapping=true;
+        window.scrollTo({top: dir>0 ? intro.offsetTop+span*0.45 : intro.offsetTop, behavior: reduce?'auto':'smooth'});
+        setTimeout(()=>{snapping=false},700);
+      }
+    },110);
+  },{passive:true});
+  let introOn=true;
+  if('IntersectionObserver' in window) new IntersectionObserver(es=>{introOn=es[0].isIntersecting},{threshold:0}).observe(intro);
+  const t0=performance.now();
+  function tick(now){
+    if(introOn && g.hidden) domIntro(introP());
+    lensFrame(now);
+    requestAnimationFrame(tick);
+  }
+
+
+  /* ---------- Lente 3D de fondo (después de la intro) ---------- */
+  let lensFrame=()=>{};
+  (function(){
+    const canvas=$('lens'); if(!window.THREE) return;
+    let renderer; try{ renderer=new THREE.WebGLRenderer({canvas,antialias:true,alpha:true}); }catch(e){ return; }
+    const mobile=innerWidth<860; renderer.setPixelRatio(Math.min(devicePixelRatio,mobile?1.25:1.5));
+    renderer.outputEncoding=THREE.sRGBEncoding; renderer.toneMapping=THREE.ACESFilmicToneMapping;
+    const scene=new THREE.Scene(), camera=new THREE.PerspectiveCamera(32,1,.1,100); camera.position.z=10;
+    const pm=new THREE.PMREMGenerator(renderer), env=new THREE.Scene(); env.background=new THREE.Color(0x111111);
+    const pane=(c,w,h,x,y,z)=>{const m=new THREE.Mesh(new THREE.PlaneGeometry(w,h),new THREE.MeshBasicMaterial({color:c,side:THREE.DoubleSide}));m.position.set(x,y,z);m.lookAt(0,0,0);env.add(m)};
+    pane(0xffffff,7,3,0,6,4); pane(0xffffff,3,6,7,1,3); pane(0xd42f27,3,6,-7,0,3); pane(0xeeeeee,8,2,0,1,-8);
+    scene.environment=pm.fromScene(env,.04).texture;
+    scene.add(new THREE.AmbientLight(0xffffff,.3));
+    const key=new THREE.DirectionalLight(0xffffff,1.4); key.position.set(4,5,6); scene.add(key);
+    const rim=new THREE.PointLight(0xd42f27,2.6,20); rim.position.set(-4,1,3); scene.add(rim);
+    const M={black:new THREE.MeshStandardMaterial({color:0x121110,metalness:.55,roughness:.35}),rubber:new THREE.MeshStandardMaterial({color:0x0a0a0a,metalness:.05,roughness:.85}),silver:new THREE.MeshStandardMaterial({color:0xcfcac4,metalness:1,roughness:.22}),red:new THREE.MeshStandardMaterial({color:0xd42f27,emissive:0xd42f27,emissiveIntensity:.7,roughness:.4}),glass:new THREE.MeshPhysicalMaterial({color:0x10161a,roughness:.04,clearcoat:1,clearcoatRoughness:.03,envMapIntensity:2.4}),inner:new THREE.MeshPhysicalMaterial({color:0x8899aa,roughness:.05,clearcoat:1,transparent:true,opacity:.45}),blade:new THREE.MeshStandardMaterial({color:0x1a1716,metalness:.8,roughness:.3,side:THREE.DoubleSide})};
+    const cyl=(a,b,h,m,s=72)=>{const o=new THREE.Mesh(new THREE.CylinderGeometry(a,b,h,s),m);o.rotation.x=Math.PI/2;return o};
+    const lens=new THREE.Group(); scene.add(lens); const parts=[];
+    const part=(o,z,ex)=>{const gr=new THREE.Group();gr.add(o);gr.position.z=z;gr.userData={z,ex};lens.add(gr);parts.push(gr);return gr};
+    part(cyl(.84,.84,.16,M.silver),-1.12,-1.9); part(cyl(.95,.95,.5,M.black),-.8,-1.15);
+    const apr=new THREE.Group(); apr.add(cyl(1,1,.3,M.black));
+    for(let i=0;i<24;i++){const t=new THREE.Mesh(new THREE.BoxGeometry(.012,.07,.012),i%4?M.silver:M.red);const a=i/24*Math.PI*2;t.position.set(Math.cos(a)*1.005,Math.sin(a)*1.005,0);t.rotation.z=a-Math.PI/2;t.rotation.x=Math.PI/2;apr.add(t)}
+    part(apr,-.4,-.7);
+    const focus=new THREE.Group(); focus.add(cyl(1.02,1.02,.66,M.rubber)); for(let i=0;i<12;i++){const r=cyl(1.065,1.065,.026,M.rubber,64);r.position.z=-.29+i*.053;focus.add(r)} part(focus,.15,0);
+    part(cyl(1.08,1.03,.46,M.black),.72,.75); part(cyl(1.088,1.088,.03,M.red),.6,.75);
+    part(new THREE.Mesh(new THREE.TorusGeometry(1.05,.065,24,120),M.black),.96,1.35);
+    const tc=document.createElement('canvas');tc.width=tc.height=1024;const cx=tc.getContext('2d');cx.fillStyle='#0b0a09';cx.fillRect(0,0,1024,1024);cx.font='600 34px "JetBrains Mono", monospace';cx.textAlign='center';cx.textBaseline='middle';
+    const txt=' @FOTOGRAFOHUILA · NEIVA · 35mm 1:1.8 · CAMILO ORTIZ MOTTA ·';
+    for(let i=0;i<txt.length;i++){const a=-Math.PI/2+i/txt.length*Math.PI*2;cx.save();cx.translate(512+Math.cos(a)*470,512+Math.sin(a)*470);cx.rotate(a+Math.PI/2);cx.fillStyle=txt[i]==='·'?'#d42f27':'#e8e2da';cx.fillText(txt[i],0,0);cx.restore()}
+    const tex=new THREE.CanvasTexture(tc);tex.encoding=THREE.sRGBEncoding;
+    part(new THREE.Mesh(new THREE.RingGeometry(.86,1,96,1),new THREE.MeshStandardMaterial({map:tex,roughness:.6,metalness:.2})),.975,1.35);
+    const th=.6,Rs=.9/Math.sin(th),cap=new THREE.Mesh(new THREE.SphereGeometry(Rs,64,24,0,Math.PI*2,0,th),M.glass);cap.rotation.x=Math.PI/2;cap.position.z=-Rs*Math.cos(th);const capG=new THREE.Group();capG.add(cap);part(capG,.94,2.1);
+    [[.4,.6],[.05,.15],[-.6,-1.45]].forEach(([z,ex])=>part(cyl(.74,.74,.05,M.inner,48),z,ex));
+    const iris=new THREE.Group(); for(let i=0;i<7;i++){const b=new THREE.Mesh(new THREE.RingGeometry(.22,.74,3,1,0,Math.PI*2/7*1.4),M.blade);b.rotation.z=i*Math.PI*2/7;iris.add(b)} part(iris,-.2,-.35);
+    let W,H; const rs=()=>{W=innerWidth;H=innerHeight;renderer.setSize(W,H,false);camera.aspect=W/H;camera.updateProjectionMatrix()}; rs(); addEventListener('resize',rs);
+    let mx=0,my=0,tx=0,ty=0,ex=0;
+    addEventListener('pointermove',e=>{tx=e.clientX/W*2-1;ty=e.clientY/H*2-1},{passive:true});
+    const t0=performance.now();
+    lensFrame=now=>{
+      if(!g.hidden) return;
+      const introEnd=intro.offsetTop+intro.offsetHeight-H*.6;
+      const q=(scrollY-introEnd)/H;
+      const vis=smooth(-.2,.3,q);
+      canvas.style.opacity=((W<860?.12:.16)*vis).toFixed(3);
+      if(vis<=0.001) return;
+      const t=(now-t0)/1000;
+      const target=reduce?0:smooth(0,3,q); ex+=(target-ex)*.06; mx+=(tx-mx)*.05; my+=(ty-my)*.05;
+      lens.scale.setScalar(W<860?1.05:1.5);
+      lens.position.set(0,(reduce?0:Math.sin(t*1.1)*.08),-1);
+      lens.rotation.y=-.6+mx*.4-ex*.8; lens.rotation.x=.12+my*.25+ex*.12; lens.rotation.z=ex*.15;
+      parts.forEach(p=>p.position.z=p.userData.z+p.userData.ex*ex*1.25); iris.rotation.z=ex*1.2;
+      renderer.render(scene,camera);
+    };
+  })();
+
+  domIntro(introP());
+  requestAnimationFrame(tick);
+})();
+</script>
+
+</body>
+</html>
