@@ -180,7 +180,7 @@ function mostrar(id, click){
   gal.classList.add('fade');
   setTimeout(()=>{
     gal.innerHTML='';
-    for(let i=1;i<=c.max;i++){
+    for(let i=c.max;i>=1;i--){   // las más nuevas (número más alto) primero
       const full=`${BASE}${c.prefijo}-${pad(i)}.jpg`, thumb=`${BASE}${c.prefijo}-${pad(i)}-t.jpg`;
       const fig=document.createElement('div'); fig.className='ph'; fig.dataset.full=full;
       const img=new Image(); img.loading='lazy';

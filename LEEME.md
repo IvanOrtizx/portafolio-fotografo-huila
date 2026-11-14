@@ -42,3 +42,4 @@ Puedes editarla siempre que quieras. Abre `index.html` en GitHub, toca el lápiz
 
 1. Sube la foto a `img/` con el siguiente número de la categoría, por ejemplo `bodas-14.jpg` y su miniatura `bodas-14-t.jpg`.
 2. En `index.html`, busca la parte **CONFIGURACIÓN** y sube el número `max` de esa categoría (por ejemplo, de 13 a 14).
+3. La foto con el número más alto sale de primera en su galería.
