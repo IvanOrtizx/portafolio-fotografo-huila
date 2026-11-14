@@ -85,6 +85,24 @@
   .lb .prev{left:4px;top:50%;transform:translateY(-50%)}
   .lb .next{right:4px;top:50%;transform:translateY(-50%)}
   @media(max-width:640px){.lb .prev,.lb .next{display:none}}
+
+  /* ---- Interacción sutil ---- */
+  .ph{opacity:0;transform:translateY(24px);transition:opacity .9s ease,transform .9s cubic-bezier(.2,.7,.2,1),filter .5s}
+  .ph.in{opacity:1;transform:none}
+  @media(hover:hover){
+    .gallery:hover .ph.in{filter:saturate(.75) brightness(.92)}
+    .gallery .ph.in:hover{filter:none}
+    .ph{cursor:none}
+  }
+  .cursor{position:fixed;left:0;top:0;z-index:40;pointer-events:none;width:64px;height:64px;margin:-32px 0 0 -32px;border-radius:50%;
+          background:rgba(246,245,243,.9);color:var(--ink);font:500 .72rem var(--sans);letter-spacing:.12em;text-transform:uppercase;
+          display:flex;align-items:center;justify-content:center;transform:scale(0);transition:transform .3s cubic-bezier(.2,.7,.2,1)}
+  .cursor.on{transform:scale(1)}
+  .lb{opacity:0;transition:opacity .35s}
+  .lb.show{opacity:1}
+  .lb img{transform:scale(.97);transition:opacity .25s,transform .45s cubic-bezier(.2,.7,.2,1)}
+  .lb.show img{transform:none}
+  @media(prefers-reduced-motion:reduce){.ph,.lb,.lb img,.cursor{transition:none!important;transform:none!important}.ph{opacity:1}}
 </style>
 </head>
 <body>
@@ -136,6 +154,7 @@
   </article>
 </main>
 
+<div class="cursor" id="cursor">Ver</div>
 <div class="lb" id="lb">
   <button class="x" id="lbClose" aria-label="Cerrar">×</button>
   <button class="prev" id="lbPrev" aria-label="Anterior">‹</button>
@@ -156,6 +175,7 @@ const CATEGORIAS = [
 ];
 
 const pad=n=>String(n).padStart(2,'0');
+const io=new IntersectionObserver(es=>es.forEach(e=>{ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target);} }),{rootMargin:'0px 0px -8% 0px'});
 const tabs=document.getElementById('tabs'), gal=document.getElementById('gallery'), about=document.getElementById('about');
 let actual=null;
 
@@ -189,7 +209,8 @@ function mostrar(id, click){
       img.onerror=()=>{ if(!img.dataset.r){img.dataset.r=1;img.src=full;} else fig.remove(); };
       img.src=thumb;
       fig.appendChild(img); fig.onclick=()=>abrir(fig);
-      gal.appendChild(fig);
+      fig.style.transitionDelay=Math.min((c.max-i)%3*90,180)+'ms';
+      gal.appendChild(fig); io.observe(fig);
     }
     gal.classList.remove('fade');
   }, click?220:0);
@@ -198,11 +219,11 @@ function mostrar(id, click){
 /* Visor */
 const lb=document.getElementById('lb'), lbImg=document.getElementById('lbImg');
 let lista=[], idx=0;
-function abrir(fig){ lista=[...gal.querySelectorAll('.ph')].filter(f=>f.querySelector('img.ok')); idx=lista.indexOf(fig); pintar(); lb.classList.add('open'); document.body.style.overflow='hidden'; }
+function abrir(fig){ lista=[...gal.querySelectorAll('.ph')].filter(f=>f.querySelector('img.ok')); idx=lista.indexOf(fig); pintar(); lb.classList.add('open'); requestAnimationFrame(()=>lb.classList.add('show')); document.body.style.overflow='hidden'; }
 function pintar(){ const f=lista[idx]; lbImg.style.opacity=0; const t=new Image();
   t.onload=()=>{lbImg.src=t.src;lbImg.style.opacity=1}; t.onerror=()=>{lbImg.src=f.querySelector('img').src;lbImg.style.opacity=1}; t.src=f.dataset.full; }
 function mover(d){ idx=(idx+d+lista.length)%lista.length; pintar(); }
-function cerrar(){ lb.classList.remove('open'); document.body.style.overflow=''; }
+function cerrar(){ lb.classList.remove('show'); setTimeout(()=>lb.classList.remove('open'),350); document.body.style.overflow=''; }
 document.getElementById('lbNext').onclick=e=>{e.stopPropagation();mover(1)};
 document.getElementById('lbPrev').onclick=e=>{e.stopPropagation();mover(-1)};
 document.getElementById('lbClose').onclick=cerrar;
@@ -213,6 +234,13 @@ let sx=null;
 lb.addEventListener('touchstart',e=>sx=e.touches[0].clientX,{passive:true});
 lb.addEventListener('touchend',e=>{ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx;
   if(Math.abs(dx)>40){ e.preventDefault(); mover(dx<0?1:-1);} sx=null; });
+
+/* Cursor "Ver" (solo computador) */
+const cur=document.getElementById('cursor');
+if(matchMedia('(hover:hover)').matches){
+  addEventListener('mousemove',e=>{ cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px';
+    cur.classList.toggle('on', !!e.target.closest('.ph') && !lb.classList.contains('open')); });
+} else cur.remove();
 
 /* Arranque: #bodas, #quince, #ninos, #personalizadas o #sobre-mi */
 const h=location.hash.slice(1);
