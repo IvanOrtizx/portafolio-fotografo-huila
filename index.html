@@ -41,6 +41,8 @@
          display:flex;align-items:center;gap:18px;padding:14px var(--pad)}
   .brand{font-family:var(--serif);font-weight:300;font-size:1.2rem;white-space:nowrap}
   .brand i{font-style:italic}
+  .brand .sub{color:var(--muted);font-style:italic}
+  @media(max-width:420px){.brand{font-size:1.05rem}}
   nav{display:flex;gap:4px;overflow-x:auto;scrollbar-width:none;flex:1;justify-content:center}
   nav::-webkit-scrollbar{display:none}
   .tab{flex:none;background:none;border:0;font:500 .9rem var(--sans);color:var(--muted);padding:8px 12px;cursor:pointer;
@@ -108,7 +110,7 @@
 <body>
 
 <header>
-  <a href="#bodas" class="brand" onclick="mostrar('bodas',true)">Camilo Ortiz <i>Motta.</i></a>
+  <a href="#bodas" class="brand" onclick="mostrar('bodas',true)">Camilo Ortiz Motta <span class="sub">- Fotografía</span></a>
   <nav id="tabs"></nav>
   <a class="wa" href="https://wa.me/573124502235?text=Hola%20Camilo%2C%20quiero%20cotizar%20un%20servicio%20de%20fotograf%C3%ADa" target="_blank" rel="noopener">WhatsApp</a>
 </header>
