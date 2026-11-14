@@ -7,7 +7,7 @@ Página web de fotografía y video, lista para publicar gratis en GitHub Pages.
 - `index.html`: toda la página (textos, diseño y funciones).
 - `img/`: las fotos. Cada foto tiene dos versiones:
   - `nombre.jpg`: la versión grande, la que se ve completa al tocar una foto.
-  - `nombre-t.jpg`: la versión pequeña, la que se usa en las teclas, la tira y el carrusel 3D.
+  - `nombre-t.jpg`: la versión pequeña, la que se usa en la galería (mosaico).
 - `.nojekyll`: un archivo vacío que GitHub Pages necesita. No lo borres.
 
 ## Publicarla en GitHub Pages
@@ -37,3 +37,8 @@ Puedes editarla siempre que quieras. Abre `index.html` en GitHub, toca el lápiz
 - **Número de WhatsApp:** aparece como `573124502235` (para los enlaces) y como `+57 312 450 2235` (para el texto que se copia). Si lo cambias, cambia todas las veces que aparece.
 - **Fotos de una galería:** sube las dos versiones de la foto nueva a `img/`, con el mismo nombre que la que reemplazas. Si agregas fotos nuevas, también hay que agregarlas a la lista `PHOTOS` dentro de `index.html`. Para no equivocarte, puedes pedirle a Claude que lo haga.
 - **Planes:** los textos de los planes están en `PLANS` y `planList` dentro de `index.html`.
+
+## Agregar fotos a una galería
+
+1. Sube la foto a `img/` con el siguiente número de la categoría, por ejemplo `bodas-14.jpg` y su miniatura `bodas-14-t.jpg`.
+2. En `index.html`, busca la parte **CONFIGURACIÓN** y sube el número `max` de esa categoría (por ejemplo, de 13 a 14).
