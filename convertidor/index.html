@@ -3,82 +3,118 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Convertir fotos RAW a JPG</title>
+<meta name="theme-color" content="#12050a">
+<title>Convertir fotos RAW a JPG | @fotografohuila</title>
+<meta name="description" content="Convierte en JPG las fotos originales que descargaste de tu carpeta. Gratis, sin subir nada, desde tu celular o computador.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --bg:#f6f3ee; --card:#ffffff; --ink:#1d1b18; --muted:#6b655c; --line:#e4ded4;
-    --accent:#1f5f5b; --accent-ink:#ffffff; --warn:#8a4b12; --warn-bg:#fbf0e2; --err:#9b2c2c;
+    --wine:#12050a; --ink:#fbf3ee; --muted:#d9c3bf; --red:#c8202f; --red-hi:#ef4552;
+    --glass:rgba(255,255,255,.06); --line:rgba(255,255,255,.14);
+    --serif:'Fraunces',Georgia,serif; --sans:'Manrope',system-ui,-apple-system,"Segoe UI",sans-serif;
   }
-  @media (prefers-color-scheme: dark){
-    :root{ --bg:#15130f; --card:#1f1c17; --ink:#f0ebe2; --muted:#a39c90; --line:#33302a;
-      --accent:#5fb3ab; --accent-ink:#10201f; --warn:#e6b377; --warn-bg:#2b2116; --err:#e58a8a; }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{-webkit-text-size-adjust:100%}
+  body{
+    min-height:100vh;color:var(--ink);font:16px/1.55 var(--sans);-webkit-font-smoothing:antialiased;
+    background:
+      radial-gradient(900px 620px at 12% -8%, rgba(214,40,57,.50), transparent 62%),
+      radial-gradient(820px 640px at 105% 12%, rgba(130,12,34,.65), transparent 58%),
+      radial-gradient(760px 520px at 50% 112%, rgba(214,40,57,.28), transparent 62%),
+      var(--wine);
+    background-attachment:fixed;
+    padding:40px 18px 28px;
+    position:relative;
   }
-  *{box-sizing:border-box}
-  html,body{margin:0}
-  body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
-    padding:24px 16px 56px}
-  .wrap{max-width:860px;margin:0 auto}
-  .brand{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
-  h1{font-size:28px;line-height:1.2;margin:0 0 10px;font-weight:700}
-  .lead{color:var(--muted);margin:0 0 22px;max-width:60ch}
-  ol.steps{list-style:none;counter-reset:s;padding:0;margin:0 0 22px;display:grid;gap:10px}
-  ol.steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:var(--card);
-    border:1px solid var(--line);border-radius:12px;padding:12px 14px}
-  ol.steps li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;
-    background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;display:grid;place-items:center;margin-top:1px}
-  .drop{border:2px dashed var(--line);border-radius:16px;background:var(--card);padding:34px 18px;text-align:center;
-    transition:border-color .15s, background .15s}
-  .drop.over{border-color:var(--accent)}
-  .drop p{margin:0 0 14px;color:var(--muted)}
-  button,.btn{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--accent);background:var(--accent);
-    color:var(--accent-ink);padding:11px 18px;font-weight:600;min-height:44px}
-  button.ghost{background:transparent;color:var(--accent)}
+  body::before{ /* grano de pelicula */
+    content:"";position:fixed;inset:0;pointer-events:none;opacity:.07;mix-blend-mode:overlay;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='2' stitchTiles='stitch'/></filter><rect width='100%' height='100%' filter='url(%23n)'/></svg>");
+  }
+  .wrap{position:relative;max-width:760px;margin:0 auto;text-align:center}
+  .logo{width:46px;height:46px;color:var(--red-hi);margin:0 auto 10px;display:block}
+  .brand{font-size:12px;letter-spacing:.22em;text-transform:uppercase;color:var(--muted);margin-bottom:14px}
+  h1{font-family:var(--serif);font-weight:300;font-size:clamp(2.1rem,6.5vw,3.4rem);line-height:1.08;margin-bottom:14px}
+  h1 em{font-style:italic;color:var(--red-hi)}
+  .lead{color:var(--muted);max-width:52ch;margin:0 auto 30px}
+
+  ol.steps{list-style:none;counter-reset:s;display:grid;grid-template-columns:repeat(3,1fr);gap:12px;margin-bottom:26px}
+  ol.steps li{counter-increment:s;background:var(--glass);border:1px solid var(--line);border-radius:16px;padding:16px 14px;
+    font-size:14.5px;backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  ol.steps li::before{content:counter(s);display:grid;place-items:center;width:30px;height:30px;margin:0 auto 10px;border-radius:50%;
+    background:var(--red);color:#fff;font-weight:700;font-size:14px}
+  @media(max-width:640px){ol.steps{grid-template-columns:1fr}}
+
+  .drop{background:var(--glass);border:2px dashed rgba(255,255,255,.28);border-radius:22px;padding:38px 20px;
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);transition:border-color .15s, background .15s}
+  .drop.over{border-color:var(--red-hi);background:rgba(239,69,82,.12)}
+  .drop p{color:var(--muted);margin-bottom:16px}
+  .drop p.note{font-size:13.5px;margin:16px 0 0}
+  button{font:inherit;font-weight:700;cursor:pointer;border-radius:999px;border:1px solid var(--red);background:var(--red);color:#fff;
+    padding:12px 24px;min-height:46px;transition:background .15s, transform .1s}
+  button:hover{background:var(--red-hi);border-color:var(--red-hi)}
+  button:active{transform:scale(.98)}
+  button.ghost{background:transparent;border-color:var(--line);color:var(--ink)}
+  button.ghost:hover{background:var(--glass)}
   button:disabled{opacity:.5;cursor:default}
-  button:focus-visible,.drop:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
-  .note{font-size:14px;color:var(--muted);margin:14px 0 0}
-  .banner{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px;margin:16px 0 0}
-  #bar{display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0 12px}
+  button:focus-visible,.drop:focus-visible,a:focus-visible{outline:3px solid #fff;outline-offset:3px}
+  .banner{margin:18px auto 0;max-width:60ch;font-size:14px;color:var(--muted)}
+
+  #bar{display:none;flex-direction:column;align-items:center;gap:12px;margin:34px 0 16px}
   #bar.on{display:flex}
-  #status{font-weight:600}
-  .bar-actions{display:flex;gap:8px;flex-wrap:wrap}
-  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
-  .item{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
-  .thumb{aspect-ratio:4/3;background:var(--line);display:grid;place-items:center;overflow:hidden}
+  #status{font-family:var(--serif);font-size:1.3rem}
+  .bar-actions{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  #hint{font-size:13.5px;color:var(--muted);display:none;margin-bottom:12px}
+  #grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(210px,230px));justify-content:center;gap:16px}
+  .item{background:var(--glass);border:1px solid var(--line);border-radius:18px;overflow:hidden;display:flex;flex-direction:column;
+    backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px)}
+  .thumb{aspect-ratio:4/3;background:rgba(0,0,0,.35);display:grid;place-items:center;overflow:hidden}
   .thumb img{width:100%;height:100%;object-fit:cover;display:block}
-  .meta{padding:10px 12px 12px;display:grid;gap:4px}
-  .name{font-weight:600;font-size:14px;word-break:break-all}
-  .sub{font-size:13px;color:var(--muted)}
-  .item button{margin-top:8px;width:100%}
-  .err{color:var(--err);font-size:13px}
-  .spin{font-size:13px;color:var(--muted);padding:20px}
-  footer{margin-top:40px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
-  footer a{color:var(--accent)}
-  #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
-    padding:10px 16px;border-radius:10px;font-size:14px;max-width:90vw;display:none;z-index:10}
+  .meta{padding:12px 14px 14px;display:grid;gap:4px}
+  .name{font-weight:700;font-size:14px;word-break:break-all}
+  .sub{font-size:12.5px;color:var(--muted)}
+  .item button{margin-top:10px;width:100%;padding:11px 14px}
+  .err{color:#ffb3b3;font-size:13px}
+
+  .social{margin-top:46px;padding-top:26px;border-top:1px solid var(--line)}
+  .social h2{font-family:var(--serif);font-weight:300;font-size:1.35rem;margin-bottom:6px}
+  .social p{color:var(--muted);font-size:14px;margin-bottom:16px}
+  .links{display:flex;gap:10px;flex-wrap:wrap;justify-content:center}
+  .links a{display:inline-flex;align-items:center;gap:8px;color:var(--ink);text-decoration:none;font-weight:500;font-size:14.5px;
+    border:1px solid var(--line);background:var(--glass);border-radius:999px;padding:10px 18px;min-height:44px;transition:background .15s,border-color .15s}
+  .links a:hover{background:rgba(239,69,82,.18);border-color:var(--red-hi)}
+  .links svg{width:18px;height:18px;flex:none}
+  footer{margin-top:30px;font-size:12.5px;color:var(--muted)}
+  #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:#fff;color:#12050a;padding:10px 16px;border-radius:12px;
+    font-size:14px;max-width:90vw;display:none;z-index:10}
   #toast.on{display:block}
-  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  .vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+  @media(prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
 <body>
-<div class="wrap">
+<main class="wrap">
+  <svg class="logo" viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+    <circle cx="24" cy="24" r="20"/><path d="M24 4l8 14M43 15H27M40 34l-13-8M24 44l-8-14M5 33l13-8M8 14l14 2"/><circle cx="24" cy="24" r="4"/>
+  </svg>
   <p class="brand">@fotografohuila</p>
-  <h1>Tus fotos, listas para el celular</h1>
+  <h1>Tus fotos, listas para <em>el celular</em></h1>
   <p class="lead">Convierte en JPG las fotos originales que descargaste de tu carpeta, para guardarlas, compartirlas o usarlas de foto de perfil.</p>
 
   <ol class="steps">
-    <li><span>En tu carpeta de Drive, abre la foto que te gusta y descárgala (tres puntos, luego Descargar). Quedará en su formato original, por ejemplo .ARW.</span></li>
-    <li><span>Toca <strong>Elegir fotos</strong> aquí abajo y selecciona los archivos que descargaste. Puedes elegir varios a la vez.</span></li>
-    <li><span>Descarga cada JPG, o todos juntos en un .zip.</span></li>
+    <li>En tu carpeta de Drive abre la foto que te gusta y descárgala (tres puntos, luego Descargar).</li>
+    <li>Toca <strong>Elegir fotos</strong> aquí abajo y selecciona los archivos que descargaste. Puedes elegir varios.</li>
+    <li>Guarda cada JPG, o todos juntos en un .zip.</li>
   </ol>
 
   <div class="drop" id="drop" tabindex="0" role="group" aria-label="Zona para soltar o elegir fotos">
     <p>Arrastra aquí tus fotos originales o elígelas desde tu dispositivo.</p>
     <button id="pick" type="button">Elegir fotos</button>
-    <input id="file" class="visually-hidden" type="file" multiple aria-label="Elegir fotos originales">
+    <input id="file" class="vh" type="file" multiple aria-label="Elegir fotos originales">
     <p class="note">Todo ocurre dentro de tu dispositivo: tus fotos no se suben a ningún lado.</p>
   </div>
-
-  <div class="banner">Estos JPG son la versión que genera la cámara, sin edición. Las fotos que elijas para la entrega final te las envío editadas.</div>
+  <p class="banner">Estos JPG son la versión que genera la cámara, sin edición. Las fotos que elijas para la entrega final te las envío editadas.</p>
 
   <div id="bar">
     <div id="status" aria-live="polite"></div>
@@ -87,13 +123,26 @@
       <button id="clearBtn" class="ghost" type="button">Limpiar</button>
     </div>
   </div>
+  <p id="hint">Al tocar Guardar foto se abre un menú: elige <strong>Guardar imagen</strong> para que quede en tu galería.</p>
   <div id="grid"></div>
 
-  <footer>
-    ¿Algo no funciona? Escríbeme por WhatsApp al
-    <a href="https://wa.me/573124502235">312 450 2235</a>.
-  </footer>
-</div>
+  <section class="social">
+    <h2>Sígueme y escríbeme</h2>
+    <p>Mira mi trabajo o cuéntame si algo no te funciona.</p>
+    <div class="links">
+      <a href="https://www.instagram.com/fotografohuila/" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="1" fill="currentColor"/></svg>
+        Instagram @fotografohuila</a>
+      <a href="https://wa.me/573124502235" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 3a9 9 0 0 0-7.8 13.5L3 21l4.6-1.2A9 9 0 1 0 12 3z"/><path d="M9 8.5c0 3.5 3 6.5 6.5 6.5l1-1.6-2-1-1 .8c-1-.4-2-1.4-2.4-2.4l.8-1-1-2z"/></svg>
+        WhatsApp 312 450 2235</a>
+      <a href="../" target="_blank" rel="noopener">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="16" rx="2"/><circle cx="9" cy="10" r="1.8"/><path d="M21 16l-5-5-8 9"/></svg>
+        Ver portafolio</a>
+    </div>
+  </section>
+  <footer>Fotografía y video en el Huila</footer>
+</main>
 <div id="toast" role="status" aria-live="polite"></div>
 
 <script>
@@ -285,25 +334,27 @@ async function makeZip(files){
 // ===== CORE END =====
 
 // ===== UI =====
-var dl = null;               // capacidad de descarga (null si no esta disponible)
-var items = [];              // {name, blob, url}
+var items = [];
 var busy = false;
 var usedNames = {};
 
 var $ = function(id){ return document.getElementById(id); };
 var grid = $('grid'), bar = $('bar'), statusEl = $('status'), zipBtn = $('zipBtn'),
-    clearBtn = $('clearBtn'), drop = $('drop'), fileIn = $('file'), pick = $('pick'), toastEl = $('toast');
+    clearBtn = $('clearBtn'), drop = $('drop'), fileIn = $('file'), pick = $('pick'), toastEl = $('toast'), hint = $('hint');
 
+var isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent) ||
+               (navigator.maxTouchPoints > 1 && /Mac/.test(navigator.platform));
+var canShareFiles = false;
 try {
-  if (window.claude && window.claude.use){
-    window.claude.use('downloads').then(function(x){ dl = x; }).catch(function(){ dl = null; });
-  }
-} catch(e){ dl = null; }
+  canShareFiles = !!(isMobile && navigator.canShare && navigator.share &&
+    navigator.canShare({files: [new File([new Uint8Array(1)], 'a.jpg', {type: 'image/jpeg'})]}));
+} catch(e){ canShareFiles = false; }
+var saveLabel = canShareFiles ? 'Guardar foto' : 'Descargar JPG';
 
 var toastT;
 function toast(msg){
   toastEl.textContent = msg; toastEl.className = 'on';
-  clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.className = ''; }, 4000);
+  clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.className = ''; }, 4500);
 }
 function mb(n){ return (n / 1048576).toFixed(1) + ' MB'; }
 function uniqueName(base){
@@ -317,18 +368,28 @@ function baseName(fn){
   return b || 'foto';
 }
 
-async function save(name, blob){
-  if (!dl){ toast('Mantén presionada la foto para guardarla en tu galería.'); return; }
-  try { await dl.save({filename: name, data: blob}); }
-  catch(e){
-    if (e && e.code === 'declined') return;
-    toast('No se pudo guardar. Mantén presionada la foto para guardarla.');
+function triggerDownload(name, blob){
+  var url = URL.createObjectURL(blob);
+  var a = document.createElement('a');
+  a.href = url; a.download = name; a.style.display = 'none';
+  document.body.appendChild(a); a.click(); a.remove();
+  setTimeout(function(){ URL.revokeObjectURL(url); }, 20000);
+}
+async function savePhoto(it){
+  if (canShareFiles){
+    try {
+      var file = new File([it.blob], it.name, {type: 'image/jpeg'});
+      if (navigator.canShare({files: [file]})){ await navigator.share({files: [file]}); return; }
+    } catch(e){
+      if (e && e.name === 'AbortError') return;
+    }
   }
+  triggerDownload(it.name, it.blob);
+  toast('Descargando ' + it.name);
 }
 
 function addCard(it, info){
-  var div = document.createElement('div');
-  div.className = 'item';
+  var div = document.createElement('div'); div.className = 'item';
   var th = document.createElement('div'); th.className = 'thumb';
   var img = document.createElement('img');
   img.src = it.url; img.alt = 'Vista previa de ' + it.name; img.loading = 'lazy';
@@ -336,8 +397,8 @@ function addCard(it, info){
   var meta = document.createElement('div'); meta.className = 'meta';
   var nm = document.createElement('div'); nm.className = 'name'; nm.textContent = it.name;
   var sb = document.createElement('div'); sb.className = 'sub'; sb.textContent = info;
-  var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Descargar JPG';
-  btn.addEventListener('click', function(){ save(it.name, it.blob); });
+  var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = saveLabel;
+  btn.addEventListener('click', function(){ savePhoto(it); });
   meta.appendChild(nm); meta.appendChild(sb); meta.appendChild(btn);
   div.appendChild(th); div.appendChild(meta);
   grid.appendChild(div);
@@ -356,6 +417,7 @@ function refreshBar(extra){
   else statusEl.textContent = items.length + (items.length === 1 ? ' foto lista' : ' fotos listas');
   zipBtn.disabled = busy || items.length < 2;
   zipBtn.style.display = items.length < 2 ? 'none' : '';
+  hint.style.display = (canShareFiles && items.length) ? 'block' : 'none';
 }
 
 async function handleFiles(fileList){
@@ -377,7 +439,7 @@ async function handleFiles(fileList){
       var buf = await f.arrayBuffer();
       var res = convertRaw(buf);
       buf = null;
-      if (!res){ addError(f.name, 'No pude sacar el JPG de este archivo. Prueba con otro o escríbeme.'); continue; }
+      if (!res){ addError(f.name, 'No pude sacar el JPG de este archivo. Prueba con otro o escríbeme por WhatsApp.'); continue; }
       var it2 = {name: uniqueName(baseName(f.name)), blob: res.blob, url: URL.createObjectURL(res.blob)};
       items.push(it2);
       addCard(it2, (res.w && res.h ? res.w + ' x ' + res.h + ' px · ' : '') + mb(res.blob.size));
@@ -390,20 +452,19 @@ async function handleFiles(fileList){
 }
 
 pick.addEventListener('click', function(){ fileIn.click(); });
-drop.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileIn.click(); } });
+drop.addEventListener('keydown', function(e){ if (e.target === drop && (e.key === 'Enter' || e.key === ' ')){ e.preventDefault(); fileIn.click(); } });
 fileIn.addEventListener('change', function(){ handleFiles(fileIn.files); });
 ['dragenter','dragover'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
 ['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
 drop.addEventListener('drop', function(e){ if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files); });
 
 zipBtn.addEventListener('click', async function(){
-  if (!items.length || busy) return;
-  if (!dl){ toast('Descarga las fotos una por una o mantenlas presionadas para guardarlas.'); return; }
+  if (items.length < 2 || busy) return;
   busy = true; refreshBar('Preparando el .zip...');
   try {
     var z = await makeZip(items);
     busy = false; refreshBar();
-    await save('fotos-jpg.zip', z);
+    triggerDownload('fotos-jpg.zip', z);
   } catch(e){ busy = false; refreshBar(); toast('No se pudo crear el .zip.'); }
 });
 clearBtn.addEventListener('click', function(){
