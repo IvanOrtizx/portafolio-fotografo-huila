@@ -1,0 +1,415 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Convertir fotos RAW a JPG</title>
+<style>
+  :root{
+    --bg:#f6f3ee; --card:#ffffff; --ink:#1d1b18; --muted:#6b655c; --line:#e4ded4;
+    --accent:#1f5f5b; --accent-ink:#ffffff; --warn:#8a4b12; --warn-bg:#fbf0e2; --err:#9b2c2c;
+  }
+  @media (prefers-color-scheme: dark){
+    :root{ --bg:#15130f; --card:#1f1c17; --ink:#f0ebe2; --muted:#a39c90; --line:#33302a;
+      --accent:#5fb3ab; --accent-ink:#10201f; --warn:#e6b377; --warn-bg:#2b2116; --err:#e58a8a; }
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0}
+  body{background:var(--bg);color:var(--ink);font:16px/1.5 system-ui,-apple-system,"Segoe UI",Roboto,sans-serif;
+    padding:24px 16px 56px}
+  .wrap{max-width:860px;margin:0 auto}
+  .brand{font-size:13px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 8px}
+  h1{font-size:28px;line-height:1.2;margin:0 0 10px;font-weight:700}
+  .lead{color:var(--muted);margin:0 0 22px;max-width:60ch}
+  ol.steps{list-style:none;counter-reset:s;padding:0;margin:0 0 22px;display:grid;gap:10px}
+  ol.steps li{counter-increment:s;display:flex;gap:12px;align-items:flex-start;background:var(--card);
+    border:1px solid var(--line);border-radius:12px;padding:12px 14px}
+  ol.steps li::before{content:counter(s);flex:none;width:26px;height:26px;border-radius:50%;
+    background:var(--accent);color:var(--accent-ink);font-weight:700;font-size:14px;display:grid;place-items:center;margin-top:1px}
+  .drop{border:2px dashed var(--line);border-radius:16px;background:var(--card);padding:34px 18px;text-align:center;
+    transition:border-color .15s, background .15s}
+  .drop.over{border-color:var(--accent)}
+  .drop p{margin:0 0 14px;color:var(--muted)}
+  button,.btn{font:inherit;cursor:pointer;border-radius:10px;border:1px solid var(--accent);background:var(--accent);
+    color:var(--accent-ink);padding:11px 18px;font-weight:600;min-height:44px}
+  button.ghost{background:transparent;color:var(--accent)}
+  button:disabled{opacity:.5;cursor:default}
+  button:focus-visible,.drop:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+  .note{font-size:14px;color:var(--muted);margin:14px 0 0}
+  .banner{background:var(--warn-bg);color:var(--warn);border-radius:10px;padding:10px 14px;font-size:14px;margin:16px 0 0}
+  #bar{display:none;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap;margin:26px 0 12px}
+  #bar.on{display:flex}
+  #status{font-weight:600}
+  .bar-actions{display:flex;gap:8px;flex-wrap:wrap}
+  #grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:14px}
+  .item{background:var(--card);border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+  .thumb{aspect-ratio:4/3;background:var(--line);display:grid;place-items:center;overflow:hidden}
+  .thumb img{width:100%;height:100%;object-fit:cover;display:block}
+  .meta{padding:10px 12px 12px;display:grid;gap:4px}
+  .name{font-weight:600;font-size:14px;word-break:break-all}
+  .sub{font-size:13px;color:var(--muted)}
+  .item button{margin-top:8px;width:100%}
+  .err{color:var(--err);font-size:13px}
+  .spin{font-size:13px;color:var(--muted);padding:20px}
+  footer{margin-top:40px;font-size:14px;color:var(--muted);border-top:1px solid var(--line);padding-top:16px}
+  footer a{color:var(--accent)}
+  #toast{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);background:var(--ink);color:var(--bg);
+    padding:10px 16px;border-radius:10px;font-size:14px;max-width:90vw;display:none;z-index:10}
+  #toast.on{display:block}
+  .visually-hidden{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0)}
+</style>
+</head>
+<body>
+<div class="wrap">
+  <p class="brand">@fotografohuila</p>
+  <h1>Tus fotos, listas para el celular</h1>
+  <p class="lead">Convierte en JPG las fotos originales que descargaste de tu carpeta, para guardarlas, compartirlas o usarlas de foto de perfil.</p>
+
+  <ol class="steps">
+    <li><span>En tu carpeta de Drive, abre la foto que te gusta y descárgala (tres puntos, luego Descargar). Quedará en su formato original, por ejemplo .ARW.</span></li>
+    <li><span>Toca <strong>Elegir fotos</strong> aquí abajo y selecciona los archivos que descargaste. Puedes elegir varios a la vez.</span></li>
+    <li><span>Descarga cada JPG, o todos juntos en un .zip.</span></li>
+  </ol>
+
+  <div class="drop" id="drop" tabindex="0" role="group" aria-label="Zona para soltar o elegir fotos">
+    <p>Arrastra aquí tus fotos originales o elígelas desde tu dispositivo.</p>
+    <button id="pick" type="button">Elegir fotos</button>
+    <input id="file" class="visually-hidden" type="file" multiple aria-label="Elegir fotos originales">
+    <p class="note">Todo ocurre dentro de tu dispositivo: tus fotos no se suben a ningún lado.</p>
+  </div>
+
+  <div class="banner">Estos JPG son la versión que genera la cámara, sin edición. Las fotos que elijas para la entrega final te las envío editadas.</div>
+
+  <div id="bar">
+    <div id="status" aria-live="polite"></div>
+    <div class="bar-actions">
+      <button id="zipBtn" type="button" disabled>Descargar todas (.zip)</button>
+      <button id="clearBtn" class="ghost" type="button">Limpiar</button>
+    </div>
+  </div>
+  <div id="grid"></div>
+
+  <footer>
+    ¿Algo no funciona? Escríbeme por WhatsApp al
+    <a href="https://wa.me/573124502235">312 450 2235</a>.
+  </footer>
+</div>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+// ===== CORE START =====
+function u16(b,o,le){ return le ? (b[o] | (b[o+1] << 8)) : ((b[o] << 8) | b[o+1]); }
+function u32(b,o,le){
+  return le ? ((b[o] | (b[o+1] << 8) | (b[o+2] << 16) | (b[o+3] << 24)) >>> 0)
+            : (((b[o] << 24) | (b[o+1] << 16) | (b[o+2] << 8) | b[o+3]) >>> 0);
+}
+
+// Lee la orientacion (tag 0x0112) del IFD0 de un bloque TIFF que empieza en t.
+function readOrientation(b, t){
+  if (t + 8 > b.length) return 1;
+  var le;
+  if (b[t] === 0x49 && b[t+1] === 0x49) le = true;
+  else if (b[t] === 0x4D && b[t+1] === 0x4D) le = false;
+  else return 1;
+  if (u16(b, t+2, le) !== 42) return 1;
+  var ifd = t + u32(b, t+4, le);
+  if (ifd + 2 > b.length) return 1;
+  var n = u16(b, ifd, le);
+  for (var i = 0; i < n; i++){
+    var e = ifd + 2 + i * 12;
+    if (e + 12 > b.length) return 1;
+    if (u16(b, e, le) === 0x0112){
+      var v = u16(b, e + 8, le);
+      return (v >= 1 && v <= 8) ? v : 1;
+    }
+  }
+  return 1;
+}
+
+// Recorre un JPEG que empieza en "start". Devuelve {end,w,h} o null si no es valido.
+function walkJpeg(b, start){
+  var n = b.length, p = start + 2, w = 0, h = 0;
+  while (p + 1 < n){
+    if (b[p] !== 0xFF) return null;
+    while (p < n && b[p] === 0xFF) p++;
+    var m = b[p]; p++;
+    if (m === 0xD9) return {end: p, w: w, h: h};
+    if (m === 0x00 || m === 0x01 || (m >= 0xD0 && m <= 0xD8)) continue;
+    if (p + 2 > n) return null;
+    var len = (b[p] << 8) | b[p+1];
+    if (len < 2) return null;
+    if (!w && m >= 0xC0 && m <= 0xCF && m !== 0xC4 && m !== 0xC8 && m !== 0xCC){
+      if (p + 7 < n){ h = (b[p+3] << 8) | b[p+4]; w = (b[p+5] << 8) | b[p+6]; }
+    }
+    p += len;
+    if (m === 0xDA){
+      while (p < n){
+        if (b[p] === 0xFF){
+          var c = b[p+1];
+          if (c === 0x00 || (c >= 0xD0 && c <= 0xD7)){ p += 2; continue; }
+          if (c === 0xFF){ p++; continue; }
+          break;
+        }
+        p++;
+      }
+    }
+  }
+  return null;
+}
+
+// Busca todos los JPEG completos incrustados en el archivo.
+function findJpegs(b){
+  var out = [], n = b.length - 3, i = 0;
+  while (i < n){
+    if (b[i] === 0xFF && b[i+1] === 0xD8 && b[i+2] === 0xFF){
+      var r = walkJpeg(b, i);
+      if (r && r.end - i > 2000){
+        out.push({start: i, end: r.end, w: r.w, h: r.h});
+        i = r.end;
+        continue;
+      }
+    }
+    i++;
+  }
+  return out;
+}
+
+// Orientacion EXIF que ya trae un JPEG (1 si no trae).
+function readJpegOrientation(j){
+  var p = 2;
+  while (p + 4 < j.length && j[p] === 0xFF){
+    var m = j[p+1], len = (j[p+2] << 8) | j[p+3];
+    if (m === 0xDA || m === 0xD9) break;
+    if (m === 0xE1 && j[p+4] === 0x45 && j[p+5] === 0x78 && j[p+6] === 0x69 && j[p+7] === 0x66){
+      return readOrientation(j, p + 10);
+    }
+    p += 2 + len;
+  }
+  return 1;
+}
+
+function exifSegment(ori){
+  var tiff = [0x49,0x49,0x2A,0x00, 0x08,0x00,0x00,0x00,
+              0x01,0x00,
+              0x12,0x01, 0x03,0x00, 0x01,0x00,0x00,0x00, ori,0x00,0x00,0x00,
+              0x00,0x00,0x00,0x00];
+  var body = [0x45,0x78,0x69,0x66,0x00,0x00].concat(tiff);
+  var len = body.length + 2;
+  return new Uint8Array([0xFF,0xE1,(len >> 8) & 255,len & 255].concat(body));
+}
+
+// Devuelve un JPEG igual al original pero con la orientacion EXIF indicada (sin recomprimir).
+function withOrientation(j, ori){
+  var p = 2, insertAt = 2, skipS = -1, skipE = -1;
+  while (p + 4 < j.length && j[p] === 0xFF){
+    var m = j[p+1], len = (j[p+2] << 8) | j[p+3];
+    if (m === 0xDA || m === 0xD9) break;
+    if (m === 0xE0 && p === 2) insertAt = p + 2 + len;
+    if (m === 0xE1 && j[p+4] === 0x45 && j[p+5] === 0x78 && j[p+6] === 0x69 && j[p+7] === 0x66){
+      skipS = p; skipE = p + 2 + len;
+    }
+    p += 2 + len;
+  }
+  var parts = [];
+  function push(a, b){ if (b > a) parts.push(j.subarray(a, b)); }
+  push(0, insertAt);
+  parts.push(exifSegment(ori));
+  if (skipS >= 0){ push(insertAt, skipS); push(skipE, j.length); }
+  else push(insertAt, j.length);
+  return parts;
+}
+
+// Convierte el contenido de un RAW en un JPEG. Devuelve {blob,w,h} o null.
+function convertRaw(buf){
+  var b = new Uint8Array(buf);
+  var list = findJpegs(b);
+  if (!list.length) return null;
+  var best = list[0];
+  for (var i = 1; i < list.length; i++){
+    if (list[i].end - list[i].start > best.end - best.start) best = list[i];
+  }
+  var jpg = b.subarray(best.start, best.end);
+  var rawOri = readOrientation(b, 0);
+  var jOri = readJpegOrientation(jpg);
+  var w = best.w, h = best.h, ori = jOri;
+  var blob;
+  if (rawOri > 1 && jOri <= 1){
+    blob = new Blob(withOrientation(jpg, rawOri), {type: 'image/jpeg'});
+    ori = rawOri;
+  } else {
+    blob = new Blob([jpg], {type: 'image/jpeg'});
+  }
+  if (ori >= 5){ var t = w; w = h; h = t; }
+  return {blob: blob, w: w, h: h};
+}
+
+// ZIP sin compresion (los JPG ya vienen comprimidos).
+var CRC_T = (function(){
+  var t = new Uint32Array(256);
+  for (var n = 0; n < 256; n++){
+    var c = n;
+    for (var k = 0; k < 8; k++) c = (c & 1) ? (0xEDB88320 ^ (c >>> 1)) : (c >>> 1);
+    t[n] = c >>> 0;
+  }
+  return t;
+})();
+function crc32(u8){
+  var c = 0xFFFFFFFF;
+  for (var i = 0; i < u8.length; i++) c = CRC_T[(c ^ u8[i]) & 255] ^ (c >>> 8);
+  return (c ^ 0xFFFFFFFF) >>> 0;
+}
+function le16(v){ return [v & 255, (v >>> 8) & 255]; }
+function le32(v){ return [v & 255, (v >>> 8) & 255, (v >>> 16) & 255, (v >>> 24) & 255]; }
+async function makeZip(files){
+  var enc = new TextEncoder(), parts = [], central = [], offset = 0;
+  var d = new Date();
+  var time = (d.getHours() << 11) | (d.getMinutes() << 5) | (d.getSeconds() >> 1);
+  var date = ((d.getFullYear() - 1980) << 9) | ((d.getMonth() + 1) << 5) | d.getDate();
+  for (var i = 0; i < files.length; i++){
+    var name = enc.encode(files[i].name);
+    var data = new Uint8Array(await files[i].blob.arrayBuffer());
+    var crc = crc32(data), size = data.length;
+    var lh = new Uint8Array([].concat(le32(0x04034b50), le16(20), le16(0x0800), le16(0), le16(time), le16(date),
+      le32(crc), le32(size), le32(size), le16(name.length), le16(0)));
+    parts.push(lh, name, data);
+    central.push(new Uint8Array([].concat(le32(0x02014b50), le16(20), le16(20), le16(0x0800), le16(0), le16(time), le16(date),
+      le32(crc), le32(size), le32(size), le16(name.length), le16(0), le16(0), le16(0), le16(0), le32(0), le32(offset))), name);
+    offset += lh.length + name.length + size;
+  }
+  var cdSize = 0;
+  central.forEach(function(c){ cdSize += c.length; });
+  var end = new Uint8Array([].concat(le32(0x06054b50), le16(0), le16(0), le16(files.length), le16(files.length),
+    le32(cdSize), le32(offset), le16(0)));
+  return new Blob(parts.concat(central, [end]), {type: 'application/zip'});
+}
+// ===== CORE END =====
+
+// ===== UI =====
+var dl = null;               // capacidad de descarga (null si no esta disponible)
+var items = [];              // {name, blob, url}
+var busy = false;
+var usedNames = {};
+
+var $ = function(id){ return document.getElementById(id); };
+var grid = $('grid'), bar = $('bar'), statusEl = $('status'), zipBtn = $('zipBtn'),
+    clearBtn = $('clearBtn'), drop = $('drop'), fileIn = $('file'), pick = $('pick'), toastEl = $('toast');
+
+try {
+  if (window.claude && window.claude.use){
+    window.claude.use('downloads').then(function(x){ dl = x; }).catch(function(){ dl = null; });
+  }
+} catch(e){ dl = null; }
+
+var toastT;
+function toast(msg){
+  toastEl.textContent = msg; toastEl.className = 'on';
+  clearTimeout(toastT); toastT = setTimeout(function(){ toastEl.className = ''; }, 4000);
+}
+function mb(n){ return (n / 1048576).toFixed(1) + ' MB'; }
+function uniqueName(base){
+  var name = base + '.jpg', k = 2;
+  while (usedNames[name.toLowerCase()]){ name = base + ' (' + k + ').jpg'; k++; }
+  usedNames[name.toLowerCase()] = true;
+  return name;
+}
+function baseName(fn){
+  var b = fn.replace(/\.[^.]*$/, '').replace(/[\\\/:*?"<>|]+/g, '_').trim();
+  return b || 'foto';
+}
+
+async function save(name, blob){
+  if (!dl){ toast('Mantén presionada la foto para guardarla en tu galería.'); return; }
+  try { await dl.save({filename: name, data: blob}); }
+  catch(e){
+    if (e && e.code === 'declined') return;
+    toast('No se pudo guardar. Mantén presionada la foto para guardarla.');
+  }
+}
+
+function addCard(it, info){
+  var div = document.createElement('div');
+  div.className = 'item';
+  var th = document.createElement('div'); th.className = 'thumb';
+  var img = document.createElement('img');
+  img.src = it.url; img.alt = 'Vista previa de ' + it.name; img.loading = 'lazy';
+  th.appendChild(img);
+  var meta = document.createElement('div'); meta.className = 'meta';
+  var nm = document.createElement('div'); nm.className = 'name'; nm.textContent = it.name;
+  var sb = document.createElement('div'); sb.className = 'sub'; sb.textContent = info;
+  var btn = document.createElement('button'); btn.type = 'button'; btn.textContent = 'Descargar JPG';
+  btn.addEventListener('click', function(){ save(it.name, it.blob); });
+  meta.appendChild(nm); meta.appendChild(sb); meta.appendChild(btn);
+  div.appendChild(th); div.appendChild(meta);
+  grid.appendChild(div);
+}
+function addError(fname, msg){
+  var div = document.createElement('div'); div.className = 'item';
+  var meta = document.createElement('div'); meta.className = 'meta';
+  var nm = document.createElement('div'); nm.className = 'name'; nm.textContent = fname;
+  var er = document.createElement('div'); er.className = 'err'; er.textContent = msg;
+  meta.appendChild(nm); meta.appendChild(er); div.appendChild(meta); grid.appendChild(div);
+}
+
+function refreshBar(extra){
+  bar.className = (items.length || busy || grid.children.length) ? 'on' : '';
+  if (extra) statusEl.textContent = extra;
+  else statusEl.textContent = items.length + (items.length === 1 ? ' foto lista' : ' fotos listas');
+  zipBtn.disabled = busy || items.length < 2;
+  zipBtn.style.display = items.length < 2 ? 'none' : '';
+}
+
+async function handleFiles(fileList){
+  if (busy) return;
+  var files = Array.prototype.slice.call(fileList);
+  if (!files.length) return;
+  busy = true; bar.className = 'on';
+  for (var i = 0; i < files.length; i++){
+    var f = files[i];
+    refreshBar('Convirtiendo ' + (i + 1) + ' de ' + files.length + '...');
+    await new Promise(function(r){ setTimeout(r, 30); });
+    try {
+      var isJpg = /\.jpe?g$/i.test(f.name) || f.type === 'image/jpeg';
+      if (isJpg){
+        var it = {name: uniqueName(baseName(f.name)), blob: f, url: URL.createObjectURL(f)};
+        items.push(it); addCard(it, 'Ya es JPG, no necesita conversión · ' + mb(f.size));
+        continue;
+      }
+      var buf = await f.arrayBuffer();
+      var res = convertRaw(buf);
+      buf = null;
+      if (!res){ addError(f.name, 'No pude sacar el JPG de este archivo. Prueba con otro o escríbeme.'); continue; }
+      var it2 = {name: uniqueName(baseName(f.name)), blob: res.blob, url: URL.createObjectURL(res.blob)};
+      items.push(it2);
+      addCard(it2, (res.w && res.h ? res.w + ' x ' + res.h + ' px · ' : '') + mb(res.blob.size));
+    } catch(e){
+      addError(f.name, 'No se pudo leer este archivo (puede ser muy pesado para este dispositivo).');
+    }
+  }
+  busy = false; refreshBar();
+  fileIn.value = '';
+}
+
+pick.addEventListener('click', function(){ fileIn.click(); });
+drop.addEventListener('keydown', function(e){ if (e.key === 'Enter' || e.key === ' '){ e.preventDefault(); fileIn.click(); } });
+fileIn.addEventListener('change', function(){ handleFiles(fileIn.files); });
+['dragenter','dragover'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.add('over'); }); });
+['dragleave','drop'].forEach(function(ev){ drop.addEventListener(ev, function(e){ e.preventDefault(); drop.classList.remove('over'); }); });
+drop.addEventListener('drop', function(e){ if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files); });
+
+zipBtn.addEventListener('click', async function(){
+  if (!items.length || busy) return;
+  if (!dl){ toast('Descarga las fotos una por una o mantenlas presionadas para guardarlas.'); return; }
+  busy = true; refreshBar('Preparando el .zip...');
+  try {
+    var z = await makeZip(items);
+    busy = false; refreshBar();
+    await save('fotos-jpg.zip', z);
+  } catch(e){ busy = false; refreshBar(); toast('No se pudo crear el .zip.'); }
+});
+clearBtn.addEventListener('click', function(){
+  items.forEach(function(it){ try { URL.revokeObjectURL(it.url); } catch(e){} });
+  items = []; usedNames = {}; grid.innerHTML = ''; refreshBar();
+});
+</script>
+</body>
+</html>
